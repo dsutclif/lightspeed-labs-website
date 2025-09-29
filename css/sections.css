@@ -516,6 +516,7 @@
 
 .publication-logo {
   height: 32px;
+  width: auto;
   margin-bottom: var(--space-4);
   display: block;
   margin-left: auto;
@@ -561,6 +562,7 @@
 
 .publication-card .publication-logo {
   height: 24px;
+  width: auto;
   margin-bottom: var(--space-3);
   display: block;
   margin-left: auto;
