@@ -132,7 +132,7 @@
 }
 
 .solution-content p {
-  color: var(--color-secondary);
+  color: var(--color-charcoal);
   margin-bottom: var(--space-4);
 }
 
@@ -416,6 +416,56 @@
   background-color: var(--color-light-gray);
 }
 
+/* As Featured In Logo Strip */
+.featured-in-section {
+  margin-bottom: var(--space-16);
+}
+
+.featured-in-title {
+  text-align: center;
+  margin-bottom: var(--space-8);
+  font-size: var(--font-size-2xl);
+  color: var(--color-secondary);
+}
+
+.logo-strip {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  background-color: var(--color-white);
+  padding: var(--space-6) 0;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.logo-strip-track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-16);
+  animation: scroll-logos 30s linear infinite;
+}
+
+.featured-logo {
+  height: 40px;
+  width: auto;
+  filter: grayscale(100%) opacity(0.7);
+  transition: all var(--transition-base);
+}
+
+.featured-logo:hover {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.1);
+}
+
+@keyframes scroll-logos {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 .featured-article {
   background-color: var(--color-white);
   border-radius: var(--border-radius-lg);
@@ -574,7 +624,7 @@
 }
 
 .about-content p {
-  color: var(--color-secondary);
+  color: var(--color-charcoal);
   margin-bottom: var(--space-4);
   line-height: var(--line-height-relaxed);
 }

@@ -8,14 +8,14 @@
 
   /* Primary Palette */
   --color-primary: #1B365D;        /* Deep Ocean Blue */
-  --color-secondary: #3D5A73;      /* Warm Slate */
-  --color-accent-1: #00B4D8;       /* Electric Cyan */
+  --color-secondary: #2B4A5F;      /* Darker Warm Slate for better contrast */
+  --color-accent-1: #0091A8;       /* Darker Electric Cyan for better readability */
   --color-accent-2: #A47864;       /* Mocha Mousse */
 
   /* Neutrals */
   --color-white: #FFFFFF;
   --color-light-gray: #F8F9FA;
-  --color-charcoal: #2D3748;
+  --color-charcoal: #1A202C;       /* Darker charcoal for better contrast */
   --color-border: #E2E8F0;
 
   /* Semantic Colors */
