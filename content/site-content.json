@@ -1,19 +1,19 @@
 {
   "problem": {
-    "headline": "The Fragmentation Problem",
-    "description": "Multiple high-priced, overly specialized tools create inefficiency without solving core challenges. Your team deserves better.",
+    "headline": "Most teams waste time on fragmented tools, underused AI, and repetitive tasks — Lightspeed turns those gaps into growth.",
+    "description": "",
     "stats": [
       {
-        "value": "$3,260+",
-        "label": "Annual cost per seat for fragmented tools"
+        "value": "70%",
+        "label": "Of workers spend 20 hours/week tool-switching, Lightspeed brings insights and actions into a single environment"
       },
       {
-        "value": "40%",
-        "label": "Time lost to tool-switching and integration issues"
+        "value": "Only 1%",
+        "label": "Of companies are making use of AI, Lightspeed helps you lead the market"
       },
       {
-        "value": "3-6 months",
-        "label": "Typical implementation timeline (vs. our 3 months)"
+        "value": "Over 25%",
+        "label": "Employee time can be saved with automation, Lightspeed automates your team's lowest value work"
       }
     ]
   },
