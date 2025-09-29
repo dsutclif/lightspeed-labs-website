@@ -1,0 +1,278 @@
+{
+  "problem": {
+    "headline": "The Fragmentation Problem",
+    "description": "Multiple high-priced, overly specialized tools create inefficiency without solving core challenges. Your team deserves better.",
+    "stats": [
+      {
+        "value": "$3,260+",
+        "label": "Annual cost per seat for fragmented tools"
+      },
+      {
+        "value": "40%",
+        "label": "Time lost to tool-switching and integration issues"
+      },
+      {
+        "value": "3-6 months",
+        "label": "Typical implementation timeline (vs. our 3 months)"
+      }
+    ]
+  },
+  "partners": [
+    {
+      "id": "vc",
+      "icon": "icon-vc-256x256.svg",
+      "headline": "Venture Capital & Investment Firms",
+      "description": "Automate investment memo generation, email triage, and founder outreach. Process 100% of opportunities in under 24 hours while maintaining bank-vault security.",
+      "benefits": [
+        "80% reduction in manual review time",
+        "Automated due diligence workflows",
+        "Intelligent email classification and routing"
+      ]
+    },
+    {
+      "id": "startup",
+      "icon": "icon-startup-256x256.svg",
+      "headline": "Technology Startups",
+      "description": "Scale operations without scaling headcount. Build AI-powered systems that handle customer support, data processing, and internal workflows with enterprise reliability.",
+      "benefits": [
+        "Deploy MVPs in weeks, not months",
+        "Modern tech stack (n8n, Claude, Gemini)",
+        "Scalable architecture from day one"
+      ]
+    },
+    {
+      "id": "digital",
+      "icon": "icon-digital-256x256.svg",
+      "headline": "Digital-First Organizations",
+      "description": "Transform email management, document processing, and customer workflows with AI that understands context and learns from your business.",
+      "benefits": [
+        "Same-day email processing",
+        "Custom-trained models on your data",
+        "Private cloud or secure cloud deployment"
+      ]
+    }
+  ],
+  "solutions": [
+    {
+      "title": "Investment Intelligence Automation",
+      "description": "AI-powered extraction and summarization for data room documents",
+      "deliverables": [
+        "Business profile extraction (9 data points)",
+        "Competitive landscape analysis",
+        "Risk assessment and financial status",
+        "Exit opportunity evaluation"
+      ],
+      "impact": "80% time reduction, 100% coverage in <1 day",
+      "image": "solution-investment-800x600.png"
+    },
+    {
+      "title": "Email & Intake Automation",
+      "description": "Intelligent classification, automated responses, and system integration",
+      "deliverables": [
+        "Multi-category email classification",
+        "Category-specific automated responses",
+        "CRM integration (Airtable, Affinity)",
+        "Referral acknowledgment automation"
+      ],
+      "impact": "80% reduction in triage time, same-day processing",
+      "image": "solution-email-800x600.png"
+    },
+    {
+      "title": "Founder Search & Outreach",
+      "description": "Automated research, validation, and personalized outreach",
+      "deliverables": [
+        "Weekly digest with relevant companies",
+        "Initial research and validation",
+        "Personalized email drafts",
+        "Event and opportunity tracking"
+      ],
+      "impact": "15 hours/week saved, 40% faster pipeline",
+      "image": "solution-founder-800x600.png"
+    },
+    {
+      "title": "Custom Workflow Design",
+      "description": "Bespoke AI solutions tailored to your specific operations",
+      "deliverables": [
+        "Process analysis and optimization",
+        "Custom AI agent development",
+        "Integration with existing tools",
+        "Documentation and training"
+      ],
+      "impact": "Variable based on scope",
+      "image": "solution-custom-800x600.png"
+    }
+  ],
+  "implementations": [
+    {
+      "title": "VC Investment Memo System",
+      "challenge": "Manual review of investment documents is time-consuming and inconsistent",
+      "solution": "Automated document extraction from data rooms, structured analysis across 9 key dimensions, standardized output format for team review, integration with deal tracking systems",
+      "technologies": "Claude Sonnet 4, Google Cloud, n8n, Airtable",
+      "deployment": "Bank Vault (recommended for VC data)",
+      "timeline": "4-6 weeks from kickoff to production"
+    },
+    {
+      "title": "Startup Email Intelligence",
+      "challenge": "Founders drowning in inbound opportunities and unable to prioritize",
+      "solution": "AI classification: Known Contact, Referral, Investment Opportunity, Uncertain, Irrelevant. Automated folder organization in Gmail, context-aware response generation, automatic CRM entry creation, thank-you note automation for referrers",
+      "technologies": "Gemini, Zapier, Gmail API, Airtable",
+      "deployment": "Wall Safe (cloud-based)",
+      "timeline": "3-4 weeks from kickoff to production"
+    },
+    {
+      "title": "Founder Discovery Engine",
+      "challenge": "Identifying and reaching promising founders is manual and time-intensive",
+      "solution": "Weekly automated research based on investment thesis, initial validation and company scoring, personalized outreach email generation, event and news monitoring, draft placement in email for review before sending",
+      "technologies": "Perplexity, Claude, n8n, LinkedIn integration",
+      "deployment": "Bank Vault (private cloud)",
+      "timeline": "5-7 weeks from kickoff to production"
+    }
+  ],
+  "methodology": {
+    "phases": [
+      {
+        "number": 1,
+        "title": "Discovery",
+        "duration": "Week 1",
+        "deliverables": [
+          "Requirements analysis",
+          "System review and architecture planning",
+          "Content analysis and data mapping",
+          "Security tier recommendation"
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Foundation",
+        "duration": "Weeks 2-4",
+        "deliverables": [
+          "Core infrastructure setup",
+          "Initial integrations",
+          "Basic automation flows",
+          "First usable deliverable"
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Enhancement",
+        "duration": "Weeks 5-8",
+        "deliverables": [
+          "Advanced features",
+          "AI model fine-tuning",
+          "User feedback integration",
+          "System optimization"
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Scale",
+        "duration": "Weeks 9-12",
+        "deliverables": [
+          "Performance optimization",
+          "Documentation creation",
+          "Team training",
+          "Handoff and support setup"
+        ]
+      }
+    ],
+    "differentiators": [
+      "Usable deliverables every 2 weeks",
+      "Iterative improvement based on real usage",
+      "Custom GPT documentation for all workflows",
+      "No vendor lock-in - you own everything"
+    ]
+  },
+  "security": [
+    {
+      "tier": "Fort Knox",
+      "level": "Maximum Security",
+      "icon": "security-fort-knox-256x256.svg",
+      "features": [
+        "Highest-tier GCP security implementation",
+        "Structured commands only for outbound data",
+        "Working copies prevent data destruction",
+        "No LLM training on proprietary data",
+        "Private cloud deployment"
+      ],
+      "bestFor": "Highly sensitive VC data, confidential R&D",
+      "pricing": "Contact for quote"
+    },
+    {
+      "tier": "Bank Vault",
+      "level": "Recommended",
+      "icon": "security-bank-vault-256x256.svg",
+      "features": [
+        "Comprehensive data masking protocols",
+        "Multi-factor authentication enforcement",
+        "Secure API connectors for all I/O",
+        "Enterprise LLM plans with no-training guarantees",
+        "Hybrid cloud deployment"
+      ],
+      "bestFor": "Most VC and startup operations",
+      "pricing": "Contact for quote",
+      "recommended": true
+    },
+    {
+      "tier": "Wall Safe",
+      "level": "Standard Cloud",
+      "icon": "security-wall-safe-256x256.svg",
+      "features": [
+        "SOC-2 compliant cloud platform",
+        "Prompt-based PII data masking",
+        "Standard API security protocols",
+        "Enterprise LLM plans with no-training",
+        "Cloud-based deployment"
+      ],
+      "bestFor": "Non-sensitive business operations",
+      "pricing": "Contact for quote"
+    }
+  ],
+  "insights": {
+    "featured": {
+      "image": "article-featured-800x450.jpg",
+      "publicationLogo": "logo-entrepreneur-120x40.png",
+      "publicationName": "Entrepreneur",
+      "headline": "Strategic Structuring: Doug Sutcliffe's Approach to AI and Data Innovation at L'Oréal Canada",
+      "excerpt": "How flexible team structures and iterative development accelerated AI deployment across L'Oréal Canada's brands, delivering measurable results in customer engagement and operational efficiency.",
+      "url": "https://www.entrepreneur.com/en-ca/leadership/strategic-structuring-doug-sutcliffes-approach-to-ai-and/480445"
+    },
+    "publications": [
+      {
+        "logo": "logo-business-insider-120x40.png",
+        "title": "The Art of Innovation: Redefining Agile Tech Development for AI",
+        "date": "2024-03-15",
+        "url": "#"
+      },
+      {
+        "logo": "logo-tech-times-120x40.png",
+        "title": "Data-Driven Strategies for Global Success: Insights from a Product Management Leader",
+        "date": "2024-02-28",
+        "url": "#"
+      },
+      {
+        "logo": "logo-ibtimes-120x40.png",
+        "title": "Agile Mastery and Data-Driven Marketing Innovation",
+        "date": "2024-01-20",
+        "url": "#"
+      },
+      {
+        "logo": "logo-hackernoon-120x40.png",
+        "title": "The Road to Sustainable AI: Proven Strategies",
+        "date": "2023-12-10",
+        "url": "#"
+      }
+    ]
+  },
+  "about": {
+    "company": "Founded by Doug Sutcliffe, former Director of Data Driven Marketing at L'Oréal US and CRM & Data Science Product Manager at L'Oréal Canada, Lightspeed Labs brings enterprise-grade AI expertise to forward-thinking organizations.",
+    "approach": "We combine deep technical knowledge with proven business transformation experience. With an agile methodology that delivers usable results every two weeks, we help clients implement AI workflows that actually work—not just look impressive in PowerPoint.",
+    "experience": [
+      "MIT Sloan Fellow",
+      "Former L'Oréal US & Canada leadership",
+      "Specialized in AI deployment and data architecture",
+      "Published in Entrepreneur, Tech Times, HackerNoon, and more",
+      "Network of 20+ specialized consultants for scaled projects"
+    ],
+    "callout": "We're a boutique firm that can scale. Solo founder for close partnership, with access to specialized talent when your project demands it."
+  }
+}

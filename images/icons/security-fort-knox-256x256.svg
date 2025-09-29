@@ -1,0 +1,8 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#F8F9FA"/>
+  <rect x="48" y="48" width="160" height="160" stroke="#00B4D8" stroke-width="4" fill="none"/>
+  <rect x="64" y="64" width="128" height="128" stroke="#00B4D8" stroke-width="3" fill="none"/>
+  <circle cx="128" cy="128" r="24" stroke="#00B4D8" stroke-width="4" fill="none"/>
+  <circle cx="128" cy="128" r="6" fill="#00B4D8"/>
+  <text x="128" y="230" text-anchor="middle" fill="#1B365D" font-family="Arial" font-size="11">Fort Knox</text>
+</svg>

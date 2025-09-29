@@ -1,0 +1,7 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" fill="#F8F9FA"/>
+  <path d="M64 192L128 96L192 128L192 192H64Z" stroke="#00B4D8" stroke-width="4" fill="none"/>
+  <circle cx="128" cy="96" r="8" fill="#00B4D8"/>
+  <circle cx="192" cy="128" r="8" fill="#00B4D8"/>
+  <text x="128" y="220" text-anchor="middle" fill="#1B365D" font-family="Arial" font-size="14">VC Icon</text>
+</svg>
