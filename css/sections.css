@@ -224,7 +224,7 @@
 }
 
 .implementation-card h4 {
-  color: var(--color-accent-1);
+  color: rgba(255, 255, 255, 0.9);
   font-size: var(--font-size-base);
   text-transform: uppercase;
   letter-spacing: 0.05em;
