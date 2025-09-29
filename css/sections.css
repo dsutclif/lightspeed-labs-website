@@ -248,6 +248,11 @@
   margin-bottom: var(--space-2);
 }
 
+.implementation-meta p strong {
+  color: var(--color-accent-1);
+  font-weight: var(--font-weight-bold);
+}
+
 /* ==================== METHODOLOGY SECTION ==================== */
 
 .methodology {
@@ -377,10 +382,12 @@
 }
 
 .security-icon {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
   margin: 0 auto var(--space-4);
   color: var(--color-accent-1);
+  display: block;
 }
 
 .security-tier h3 {
