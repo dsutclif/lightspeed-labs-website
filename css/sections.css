@@ -125,12 +125,13 @@
   margin-bottom: var(--space-20);
 }
 
-.solution-item:nth-child(even) .solution-content {
-  order: 2;
+/* Mobile: Always content first, then visual */
+.solution-content {
+  order: 1;
 }
 
-.solution-item:nth-child(even) .solution-visual {
-  order: 1;
+.solution-visual {
+  order: 2;
 }
 
 .solution-content h3 {
@@ -180,6 +181,15 @@
 @media (min-width: 768px) {
   .solution-item {
     grid-template-columns: 1fr 1fr;
+  }
+
+  /* Desktop: Alternate layout for even items */
+  .solution-item:nth-child(even) .solution-content {
+    order: 2;
+  }
+
+  .solution-item:nth-child(even) .solution-visual {
+    order: 1;
   }
 }
 
