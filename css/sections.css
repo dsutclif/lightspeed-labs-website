@@ -67,16 +67,13 @@
 
 @media (min-width: 1024px) {
   .hero-container {
-    grid-template-columns: 60fr 40fr;
-    text-align: left;
-  }
-
-  .hero-content {
-    text-align: center;
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    margin: 0 auto;
   }
 
   .hero-visual {
-    display: block;
+    display: none;
   }
 }
 
