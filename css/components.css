@@ -354,11 +354,11 @@
   flex-wrap: wrap;
   margin-top: var(--space-6);
   font-size: var(--font-size-sm);
-  color: var(--color-secondary);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .trust-badges::before,
 .trust-badges::after {
   content: '•';
-  color: var(--color-accent-1);
+  color: rgba(255, 255, 255, 0.6);
 }
