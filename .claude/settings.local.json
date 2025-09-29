@@ -1,18 +1,7 @@
 {
   "permissions": {
     "allow": [
-      "Bash(mkdir:*)",
-      "Bash(curl:*)",
-      "Bash(git init:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(gh repo create:*)",
-      "Bash(git branch:*)",
-      "Bash(git remote add:*)",
-      "Bash(git push:*)",
-      "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/Work/Douglas Sutcliffe Consulting/Fusion Consulting/Module 12 website/Website Images/**)",
-      "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/Work/Douglas Sutcliffe Consulting/AI & Agile Consulting/Lightspeed Labs Website/Images for Site/**)",
-      "Bash(and repetitive tasks — Lightspeed turns those gaps into growth.\"\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
