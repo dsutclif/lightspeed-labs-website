@@ -186,7 +186,7 @@
     {
       "tier": "Fort Knox",
       "level": "Maximum Security",
-      "icon": "security-fort-knox-256x256.svg",
+      "icon": "security-fort-knox-256x256.png",
       "features": [
         "Highest-tier GCP security implementation",
         "Structured commands only for outbound data",
@@ -200,7 +200,7 @@
     {
       "tier": "Bank Vault",
       "level": "Recommended",
-      "icon": "security-bank-vault-256x256.svg",
+      "icon": "security-bank-vault-256x256.png",
       "features": [
         "Comprehensive data masking protocols",
         "Multi-factor authentication enforcement",
@@ -215,7 +215,7 @@
     {
       "tier": "Wall Safe",
       "level": "Standard Cloud",
-      "icon": "security-wall-safe-256x256.svg",
+      "icon": "security-wall-safe-256x256.png",
       "features": [
         "SOC-2 compliant cloud platform",
         "Prompt-based PII data masking",
