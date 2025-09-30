@@ -204,13 +204,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: var(--space-4);
-  padding-bottom: var(--space-4);
-  max-width: 768px; /* 40% narrower than standard 1280px container */
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
+  padding-top: var(--space-2); /* Reduced from var(--space-4) for 40% less height */
+  padding-bottom: var(--space-2); /* Reduced from var(--space-4) for 40% less height */
 }
 
 .logo {
@@ -225,7 +220,7 @@
 }
 
 .logo-image {
-  height: 48px;
+  height: 32px; /* Reduced from 48px for 40% less height */
   width: auto;
   display: block;
 }
