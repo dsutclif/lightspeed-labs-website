@@ -226,7 +226,7 @@
 }
 
 .logo-image {
-  height: 24px; /* Further reduced for even less height */
+  height: 48px; /* 2x larger than 24px to make logo prominent */
   width: auto;
   display: block;
 }
