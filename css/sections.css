@@ -665,6 +665,13 @@
     height: 48px;
   }
 
+  .featured-article-content {
+    padding-top: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .newsletter-form {
     flex-direction: row;
   }
