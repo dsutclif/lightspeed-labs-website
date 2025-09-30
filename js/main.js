@@ -247,12 +247,20 @@ function populateInsights(insights) {
     document.querySelector('.publication-logo').alt = f.publicationName;
     featuredContainer.querySelector('h3').textContent = f.headline;
     document.querySelector('.featured-article-excerpt').textContent = f.excerpt;
-    const articleButton = document.querySelector('.featured-article .article-cta .btn-primary');
+    const articleButton = featuredContainer.querySelector('.article-cta .btn-primary');
     if (articleButton) {
       articleButton.href = f.url;
+      articleButton.setAttribute('target', '_blank');
       console.log('Article button URL set to:', f.url);
     } else {
-      console.log('Article button not found');
+      console.log('Article button not found in featured container');
+      // Fallback: try global selector
+      const fallbackButton = document.querySelector('.featured-article .article-cta a[href="#"]');
+      if (fallbackButton) {
+        fallbackButton.href = f.url;
+        fallbackButton.setAttribute('target', '_blank');
+        console.log('Article button found with fallback selector');
+      }
     }
   }
 
