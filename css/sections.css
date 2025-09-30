@@ -129,6 +129,9 @@
 /* Mobile: Always content first, then visual */
 .solution-content {
   order: 1;
+  background-color: var(--color-white);
+  padding: var(--space-6);
+  border-radius: var(--border-radius-md);
 }
 
 .solution-visual {
@@ -250,7 +253,7 @@
 }
 
 .implementation-meta p strong {
-  color: var(--color-accent-1);
+  color: var(--color-white);
   font-weight: var(--font-weight-bold);
 }
 
