@@ -219,6 +219,8 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-white);
   transition: color var(--transition-fast);
+  display: flex;
+  align-items: center; /* Ensure logo is vertically centered */
 }
 
 .header.scrolled .logo {

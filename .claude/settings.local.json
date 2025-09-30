@@ -3,7 +3,9 @@
     "allow": [
       "Bash(ls:*)",
       "WebFetch(domain:www.entrepreneur.com)",
-      "WebFetch(domain:techbullion.com)"
+      "WebFetch(domain:techbullion.com)",
+      "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/Work/Douglas Sutcliffe Consulting/Fusion Consulting/Module 12 website/module-12/**)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []
