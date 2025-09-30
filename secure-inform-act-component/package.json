@@ -1,0 +1,27 @@
+{
+  "name": "secure-inform-act-component",
+  "version": "1.0.0",
+  "description": "Next.js SecureInformAct component with hover-isolate layered graphics",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.22",
+    "next": "^15.5.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "@types/react": "^19.1.16",
+    "typescript": "^5.9.3"
+  },
+  "keywords": ["nextjs", "react", "component", "framer-motion", "typescript"],
+  "author": "",
+  "license": "ISC"
+}

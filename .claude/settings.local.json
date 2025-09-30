@@ -5,7 +5,18 @@
       "WebFetch(domain:www.entrepreneur.com)",
       "WebFetch(domain:techbullion.com)",
       "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/Work/Douglas Sutcliffe Consulting/Fusion Consulting/Module 12 website/module-12/**)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run type-check:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx next:*)",
+      "Bash(vercel:*)",
+      "Bash(npm run build:*)",
+      "Bash(python:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

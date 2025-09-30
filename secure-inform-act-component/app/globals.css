@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+/* TODO: Add OCR A Extended font when .woff2 file is available */
+@font-face {
+  font-family: 'OCR A Extended';
+  src: url('/fonts/OCRAExtended.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Colors based on specification */
+  --color-primary-blue: #0a5bd8;
+  --color-dark-blue: #1B365D;
+  --color-text-grey: #aab3c0;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Typography */
+  --font-ocr: 'OCR A Extended', 'IBM Plex Mono', 'Roboto Mono', monospace;
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 400ms ease-in-out;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--color-white);
+  background: var(--color-dark-blue);
+  font-family: var(--font-ocr);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Font utility class */
+.font-ocr {
+  font-family: var(--font-ocr);
+  letter-spacing: 0.06em;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary-blue);
+  outline-offset: 2px;
+}
