@@ -37,9 +37,6 @@ function initNavigation() {
     header.classList.add('scrolled');
   }
 
-  // Force immediate style update
-  header.style.backgroundColor = currentScroll <= 50 ? 'transparent' : 'var(--color-white)';
-
   window.addEventListener('scroll', handleScroll);
 
   // Smooth scroll for navigation links
