@@ -1,4 +1,11 @@
 {
+  "hero": {
+    "headline": "AI Workflow Automation That Scales With Your Ambition",
+    "description": "Transform your operations with intelligent automation. From investment memo processing to founder outreach, we build AI systems that deliver 80%+ time savings while maintaining enterprise security.",
+    "cta_primary": "Schedule Consultation",
+    "cta_secondary": "See Our Approach",
+    "trust_badges": ["Trusted by VCs", "Startups", "Digital Leaders"]
+  },
   "problem": {
     "headline": "Most teams waste time on fragmented tools, underused AI, and repetitive tasks — Lightspeed turns those gaps into growth.",
     "description": "",

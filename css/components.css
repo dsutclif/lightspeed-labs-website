@@ -228,7 +228,7 @@
 }
 
 .logo-image {
-  height: 48px; /* 2x larger than 24px to make logo prominent */
+  height: 34px; /* 30% smaller than 48px for better proportion */
   width: auto;
   display: block;
 }

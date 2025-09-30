@@ -95,6 +95,12 @@ async function loadDynamicContent() {
     return;
   }
 
+  // Populate hero content
+  populateHero(content.hero);
+
+  // Populate problem section
+  populateProblem(content.problem);
+
   // Populate stats
   populateStats(content.problem.stats);
 
@@ -118,6 +124,35 @@ async function loadDynamicContent() {
 
   // Populate about content
   populateAbout(content.about);
+}
+
+// Populate hero section
+function populateHero(hero) {
+  const heroContent = document.querySelector('.hero-content');
+  if (!heroContent || !hero) return;
+
+  heroContent.innerHTML = `
+    <h1>${hero.headline}</h1>
+    <p>${hero.description}</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-primary btn-large">${hero.cta_primary}</a>
+      <a href="#solutions" class="btn btn-secondary btn-large">${hero.cta_secondary}</a>
+    </div>
+    <div class="trust-badges">
+      ${hero.trust_badges.map(badge => `<span>${badge}</span>`).join('')}
+    </div>
+  `;
+}
+
+// Populate problem section
+function populateProblem(problem) {
+  const problemContent = document.querySelector('.problem-content');
+  if (!problemContent || !problem) return;
+
+  problemContent.innerHTML = `
+    <h2>${problem.headline}</h2>
+    ${problem.description ? `<p>${problem.description}</p>` : ''}
+  `;
 }
 
 // Populate stats section
