@@ -18,15 +18,18 @@ class SecureInformAct {
     this.content = {
       secure: {
         title: "SECURE",
-        subtitle: "Enterprise-grade AI workspace where your data stays yours. Zero exposure. Zero hallucinations. Zero legal surprises."
+        lightspeedDelivers: "Lightspeed delivers:",
+        description: "Enterprise-grade AI workspace where your data stays yours. Zero exposure. Zero hallucinations. Zero legal surprises."
       },
       inform: {
         title: "INFORM",
-        subtitle: "Central nervous system for your company's knowledge. Google Drive, email, Slack, Notion, PDFs, all instantly queryable."
+        lightspeedDelivers: "Lightspeed delivers:",
+        description: "Central nervous system for your company's knowledge. Google Drive, email, Slack, Notion, PDFs, all instantly queryable."
       },
       act: {
         title: "ACT",
-        subtitle: "AI operators that actually do work: summarize investor updates, pull talent lists, draft reports and communications."
+        lightspeedDelivers: "Lightspeed delivers:",
+        description: "AI operators that actually do work: summarize investor updates, pull talent lists, draft reports and communications."
       }
     };
 
@@ -55,34 +58,62 @@ class SecureInformAct {
         </div>
 
         <!-- Main Content Container -->
-        <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
 
-          <!-- Left Side: Layered Images -->
-          <div class="artwork-container" style="position: relative; width: 100%; aspect-ratio: 1; max-width: 600px; margin: 0 auto;">
-            ${this.layers.map((layer, index) => `
+          <!-- Left Side: Layered Images (Properly Sized) -->
+          <div class="artwork-container" style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto;">
+            ${this.layers.map((layer, index) => {
+              // Different sizes for each layer to match the reference image
+              const sizes = {
+                'secure': { width: '100%', height: '100%' },  // Outermost ring - largest
+                'inform': { width: '80%', height: '80%' },    // Middle ring
+                'act': { width: '60%', height: '60%' }        // Inner ring - smallest
+              };
+              const size = sizes[layer];
+
+              return `
               <div class="layer-wrapper" data-layer="${layer}"
-                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: ${10 + index};">
+                   style="position: absolute; top: 50%; left: 50%; width: ${size.width}; height: ${size.height};
+                          transform: translate(-50%, -50%); cursor: pointer; z-index: ${10 + index};">
                 <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
                      class="layer-image" data-layer="${layer}"
                      style="width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease;">
               </div>
-            `).join('')}
+            `;
+            }).join('')}
           </div>
 
           <!-- Right Side: Text Content -->
           <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace;">
             ${this.layers.map((layer, index) => `
               <div class="text-block" data-layer="${layer}"
-                   style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
-                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
-                  <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
-                  <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
-                    ${this.content[layer].title}
-                  </h3>
+                   style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease; position: relative;">
+
+                <!-- Default State: Only "Lightspeed delivers" -->
+                <div class="default-text" style="display: block;">
+                  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
+                    <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
+                      ${this.content[layer].title}
+                    </h3>
+                  </div>
+                  <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0; padding-left: 75px;">
+                    ${this.content[layer].lightspeedDelivers}
+                  </p>
                 </div>
-                <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0; padding-left: 75px;">
-                  ${this.content[layer].subtitle}
-                </p>
+
+                <!-- Hover State: Full description -->
+                <div class="hover-text" style="display: none; position: absolute; top: 0; left: 0; width: 100%;">
+                  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
+                    <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
+                      ${this.content[layer].title}
+                    </h3>
+                  </div>
+                  <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0; padding-left: 75px;">
+                    ${this.content[layer].description}
+                  </p>
+                </div>
               </div>
             `).join('')}
           </div>
@@ -195,7 +226,7 @@ class SecureInformAct {
     const textBlocks = this.container.querySelectorAll('.text-block');
 
     if (this.hoveredLayer) {
-      // Hover state: fade non-hovered elements
+      // Hover state: fade non-hovered elements, show full description for hovered
       layerWrappers.forEach(wrapper => {
         const layer = wrapper.dataset.layer;
         const image = wrapper.querySelector('.layer-image');
@@ -213,14 +244,23 @@ class SecureInformAct {
 
       textBlocks.forEach(block => {
         const layer = block.dataset.layer;
+        const defaultText = block.querySelector('.default-text');
+        const hoverText = block.querySelector('.hover-text');
+
         if (layer === this.hoveredLayer) {
+          // Show full description for hovered layer
           block.style.opacity = '1';
+          defaultText.style.display = 'none';
+          hoverText.style.display = 'block';
         } else {
+          // Hide non-hovered layers
           block.style.opacity = '0.3';
+          defaultText.style.display = 'block';
+          hoverText.style.display = 'none';
         }
       });
     } else {
-      // Default state: all elements visible
+      // Default state: all elements visible with "Lightspeed delivers" text
       layerWrappers.forEach(wrapper => {
         const image = wrapper.querySelector('.layer-image');
         image.style.opacity = '1';
@@ -229,7 +269,12 @@ class SecureInformAct {
       });
 
       textBlocks.forEach(block => {
+        const defaultText = block.querySelector('.default-text');
+        const hoverText = block.querySelector('.hover-text');
+
         block.style.opacity = '1';
+        defaultText.style.display = 'block';
+        hoverText.style.display = 'none';
       });
     }
   }
