@@ -561,6 +561,9 @@
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-md);
   transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .publication-card:hover {
@@ -578,8 +581,9 @@
 }
 
 .publication-card h4 {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   margin-bottom: var(--space-2);
+  margin-top: auto;
 }
 
 .publication-title-link {
@@ -817,6 +821,6 @@
   padding-top: var(--space-8);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   text-align: center;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-white);
   font-size: var(--font-size-sm);
 }

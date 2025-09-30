@@ -247,9 +247,12 @@ function populateInsights(insights) {
     document.querySelector('.publication-logo').alt = f.publicationName;
     featuredContainer.querySelector('h3').textContent = f.headline;
     document.querySelector('.featured-article-excerpt').textContent = f.excerpt;
-    const articleButton = document.querySelector('.article-cta .btn-primary');
+    const articleButton = document.querySelector('.featured-article .article-cta .btn-primary');
     if (articleButton) {
       articleButton.href = f.url;
+      console.log('Article button URL set to:', f.url);
+    } else {
+      console.log('Article button not found');
     }
   }
 
