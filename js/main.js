@@ -34,10 +34,11 @@ function initNavigation() {
   // Smooth scroll for navigation links
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href');
-      if (targetId !== '#') {
-        smoothScroll(targetId);
+      const href = link.getAttribute('href');
+      // Only handle internal anchor links, not external URLs
+      if (href && href.startsWith('#') && href !== '#') {
+        e.preventDefault();
+        smoothScroll(href);
         // Close mobile menu if open
         closeMobileMenu();
       }

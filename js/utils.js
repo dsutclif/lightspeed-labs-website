@@ -5,16 +5,25 @@
 
 // Smooth scroll to section
 export function smoothScroll(targetId) {
-  const target = document.querySelector(targetId);
-  if (target) {
-    const headerOffset = 80;
-    const elementPosition = target.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  // Only handle anchor links (starting with #)
+  if (!targetId || !targetId.startsWith('#')) {
+    return;
+  }
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
+  try {
+    const target = document.querySelector(targetId);
+    if (target) {
+      const headerOffset = 80;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  } catch (error) {
+    console.log('Smooth scroll ignored invalid selector:', targetId);
   }
 }
 
