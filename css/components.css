@@ -35,6 +35,12 @@
   border-color: var(--color-white);
 }
 
+/* Make header buttons smaller for compact header */
+.header .btn {
+  padding: var(--space-2) var(--space-4); /* Smaller than default var(--space-3) var(--space-6) */
+  font-size: var(--font-size-sm); /* Smaller text */
+}
+
 .btn-primary:hover {
   background-color: var(--color-accent-1);
   border-color: var(--color-accent-1);
@@ -204,8 +210,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: var(--space-2); /* Reduced from var(--space-4) for 40% less height */
-  padding-bottom: var(--space-2); /* Reduced from var(--space-4) for 40% less height */
+  padding-top: var(--space-1); /* Further reduced for even less height */
+  padding-bottom: var(--space-1); /* Further reduced for even less height */
 }
 
 .logo {
@@ -220,7 +226,7 @@
 }
 
 .logo-image {
-  height: 32px; /* Reduced from 48px for 40% less height */
+  height: 24px; /* Further reduced for even less height */
   width: auto;
   display: block;
 }
