@@ -7,7 +7,7 @@
 
 .hero {
   position: relative;
-  min-height: 50vh; /* 50% less tall to show next section */
+  min-height: 75vh; /* Adjusted height to show next section while maintaining good proportion */
   display: flex;
   align-items: center;
   background: linear-gradient(135deg, rgba(27, 54, 93, 0.8) 0%, rgba(43, 74, 95, 0.8) 100%);
