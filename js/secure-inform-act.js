@@ -6,7 +6,7 @@
 class SecureInformAct {
   constructor(container) {
     this.container = container;
-    this.activeLayer = 'secure';
+    this.hoveredLayer = null;
     this.layers = ['secure', 'inform', 'act'];
     this.animationConfig = {
       duration: 250,
@@ -18,24 +18,15 @@ class SecureInformAct {
     this.content = {
       secure: {
         title: "SECURE",
-        subtitle: "[ Encrypted Cloud • SOC 2 • Zero Trust • PII Redaction ]",
-        pain: "\"We can't adopt AI because security/compliance won't allow it.\"",
-        value: "Enterprise-grade AI workspace — your data stays yours. No training leakage. No legal surprises.",
-        capability: "Private GCP tenancy with outbound controls, PII stripping, secrets management, audit trails."
+        subtitle: "Enterprise-grade AI workspace where your data stays yours. Zero exposure. Zero hallucinations. Zero legal surprises."
       },
       inform: {
         title: "INFORM",
-        subtitle: "[ RAG • Knowledge Fabric • Organizational Memory ]",
-        pain: "\"Our knowledge is scattered across Drive, Slack, and inboxes — every decision starts from zero.\"",
-        value: "A central nervous system for company knowledge — instantly queryable, continuously up to date.",
-        capability: "RAG over Google Drive, Slack, Email, Notion, and PDFs with source citations and freshness."
+        subtitle: "Central nervous system for your company's knowledge. Google Drive, email, Slack, Notion, PDFs, all instantly queryable."
       },
       act: {
         title: "ACT",
-        subtitle: "[ Agents • Workflow Automation ]",
-        pain: "\"30% of our time is manual ops — memos, recruiting lists, reporting, email triage.\"",
-        value: "AI operators that actually do work — from first drafts to structured handoffs.",
-        capability: "Agents to summarize investor updates, pull talent lists, draft reports and communications."
+        subtitle: "AI operators that actually do work: summarize investor updates, pull talent lists, draft reports and communications."
       }
     };
 
@@ -56,121 +47,84 @@ class SecureInformAct {
 
   createHTML() {
     this.container.innerHTML = `
-      <section class="secure-inform-act relative" style="width: 100%; min-height: 70vh; overflow: hidden;">
+      <section class="secure-inform-act" style="position: relative; width: 100%; min-height: 80vh; overflow: hidden; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
         <!-- Background Image -->
-        <div class="absolute inset-0" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;">
           <img src="images/Offerings Background.png" alt=""
-               style="width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 0;">
+               style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
         </div>
 
-        <!-- Main Content -->
-        <div class="relative" style="position: relative; z-index: 10; max-width: 1280px; margin: 0 auto; padding: 4rem 1.5rem; min-height: 70vh;">
-          <div class="content-grid" style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+        <!-- Main Content Container -->
+        <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
 
-            <!-- Artwork Section -->
-            <div class="artwork-container"
-                 style="position: relative; aspect-ratio: 1; margin: 0 auto; width: 100%; max-width: 560px; display: flex; align-items: center; justify-content: center;">
-              ${this.layers.map((layer, index) => `
-                <button class="layer-button"
-                        data-layer="${layer}"
-                        aria-label="Activate ${this.content[layer].title} layer"
-                        aria-pressed="${this.activeLayer === layer}"
-                        aria-controls="text-panel"
-                        tabindex="0"
-                        style="position: absolute; inset: 0; background: none; border: none; cursor: pointer; transition: all 200ms ease-in-out; z-index: ${10 + index};">
-                  <div class="layer-image" data-layer="${layer}"
-                       style="width: 100%; height: 100%; transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);">
-                    <img src="${this.layerImages[layer]}"
-                         alt=""
-                         style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 0; left: 0;">
-                  </div>
-                </button>
-              `).join('')}
-            </div>
-
-            <!-- Text Panel -->
-            <aside id="text-panel"
-                   aria-live="polite"
-                   class="text-panel"
-                   style="font-family: 'Space Mono', 'Courier New', monospace; display: flex; flex-direction: column; justify-content: center; color: white; letter-spacing: 0.06em;">
-
-              <div class="content-container" style="space-y: 1rem;">
-                <!-- Title -->
-                <h3 class="title"
-                    style="font-size: 2.25rem; font-weight: bold; color: white; letter-spacing: 0.05em; margin-bottom: 1rem;">
-                  ${this.content[this.activeLayer].title}
-                </h3>
-
-                <!-- Subtitle -->
-                <p class="subtitle"
-                   style="font-size: 0.875rem; color: #d1d5db; font-weight: normal; margin-bottom: 1rem;">
-                  ${this.content[this.activeLayer].subtitle}
-                </p>
-
-                <!-- Indicator Line -->
-                <div class="indicator-line"
-                     style="position: relative; width: 100%; height: 1px; margin: 1rem 0;">
-                  <div class="line"
-                       style="position: absolute; inset: 0; background: linear-gradient(to right, #60a5fa, transparent); transform-origin: left; animation: drawLine 300ms ease-out;">
-                  </div>
-                  <div class="dot"
-                       style="position: absolute; top: 50%; width: 8px; height: 8px; background: #60a5fa; border-radius: 50%; transform: translateY(-50%); animation: moveDot 400ms ease-out 150ms both;">
-                  </div>
-                </div>
-
-                <!-- Content Sections -->
-                <div class="content-sections" style="margin-top: 1.5rem; space-y: 1rem;">
-                  <div class="content-item" style="margin-bottom: 1rem;">
-                    <strong style="color: #60a5fa;">Pain point:</strong>
-                    <p class="pain-content" style="margin-top: 0.25rem; color: #e5e7eb; line-height: 1.625;">
-                      ${this.content[this.activeLayer].pain}
-                    </p>
-                  </div>
-
-                  <div class="content-item" style="margin-bottom: 1rem;">
-                    <strong style="color: #60a5fa;">Value:</strong>
-                    <p class="value-content" style="margin-top: 0.25rem; color: #e5e7eb; line-height: 1.625;">
-                      ${this.content[this.activeLayer].value}
-                    </p>
-                  </div>
-
-                  <div class="content-item" style="margin-bottom: 1rem;">
-                    <strong style="color: #60a5fa;">Capability:</strong>
-                    <p class="capability-content" style="margin-top: 0.25rem; color: #e5e7eb; line-height: 1.625;">
-                      ${this.content[this.activeLayer].capability}
-                    </p>
-                  </div>
-                </div>
+          <!-- Left Side: Layered Images -->
+          <div class="artwork-container" style="position: relative; width: 100%; aspect-ratio: 1; max-width: 600px; margin: 0 auto;">
+            ${this.layers.map((layer, index) => `
+              <div class="layer-wrapper" data-layer="${layer}"
+                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; z-index: ${10 + index};">
+                <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
+                     class="layer-image" data-layer="${layer}"
+                     style="width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease;">
               </div>
-            </aside>
+            `).join('')}
+          </div>
+
+          <!-- Right Side: Text Content -->
+          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace;">
+            ${this.layers.map((layer, index) => `
+              <div class="text-block" data-layer="${layer}"
+                   style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                  <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
+                  <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
+                    ${this.content[layer].title}
+                  </h3>
+                </div>
+                <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0; padding-left: 75px;">
+                  ${this.content[layer].subtitle}
+                </p>
+              </div>
+            `).join('')}
           </div>
         </div>
 
         <style>
-          @keyframes drawLine {
-            from { transform: scaleX(0); }
-            to { transform: scaleX(1); }
+          .secure-inform-act .layer-wrapper {
+            cursor: pointer;
           }
 
-          @keyframes moveDot {
-            from { transform: translateY(-50%) translateX(0); opacity: 0; }
-            to { transform: translateY(-50%) translateX(120px); opacity: 1; }
+          .secure-inform-act .layer-wrapper:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 4px;
+            border-radius: 8px;
           }
 
-          .layer-button:focus-visible {
-            outline: 2px solid #0a5bd8;
-            outline-offset: 2px;
+          .secure-inform-act .text-block {
+            cursor: pointer;
           }
 
-          @media (min-width: 1024px) {
-            .content-grid {
-              grid-template-columns: 55% 45% !important;
+          @media (max-width: 1024px) {
+            .secure-inform-act > div {
+              grid-template-columns: 1fr !important;
+              gap: 2rem !important;
+              text-align: center;
             }
-            .title {
-              font-size: 3rem !important;
+
+            .artwork-container {
+              max-width: 400px !important;
             }
-            .subtitle {
-              font-size: 1rem !important;
+
+            .text-block h3 {
+              font-size: 1.5rem !important;
+            }
+
+            .text-block p {
+              font-size: 0.9rem !important;
+              padding-left: 0 !important;
+            }
+
+            .text-block div {
+              justify-content: center !important;
             }
           }
         </style>
@@ -179,120 +133,105 @@ class SecureInformAct {
   }
 
   bindEvents() {
-    const layerButtons = this.container.querySelectorAll('.layer-button');
+    const layerWrappers = this.container.querySelectorAll('.layer-wrapper');
+    const textBlocks = this.container.querySelectorAll('.text-block');
+    const container = this.container.querySelector('.secure-inform-act');
 
-    layerButtons.forEach(button => {
-      const layer = button.dataset.layer;
+    layerWrappers.forEach(wrapper => {
+      const layer = wrapper.dataset.layer;
 
-      // Mouse events
-      button.addEventListener('mouseenter', () => this.setActiveLayer(layer));
-      button.addEventListener('focus', () => this.setActiveLayer(layer));
+      wrapper.addEventListener('mouseenter', () => {
+        this.setHoverState(layer);
+      });
 
-      // Keyboard events
-      button.addEventListener('keydown', (e) => this.handleKeyDown(e, layer));
+      wrapper.addEventListener('mouseleave', () => {
+        this.clearHoverState();
+      });
+
+      // Keyboard accessibility
+      wrapper.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.setHoverState(layer);
+        }
+      });
+
+      wrapper.setAttribute('tabindex', '0');
+      wrapper.setAttribute('role', 'button');
+      wrapper.setAttribute('aria-label', `View ${this.content[layer].title} details`);
+    });
+
+    // Also bind to text blocks for cross-interaction
+    textBlocks.forEach(block => {
+      const layer = block.dataset.layer;
+
+      block.addEventListener('mouseenter', () => {
+        this.setHoverState(layer);
+      });
+
+      block.addEventListener('mouseleave', () => {
+        this.clearHoverState();
+      });
+    });
+
+    // Container mouse leave to reset state
+    container.addEventListener('mouseleave', () => {
+      this.clearHoverState();
     });
   }
 
-  handleKeyDown(event, layer) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      this.setActiveLayer(layer);
-    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      event.preventDefault();
-      const currentIndex = this.layers.indexOf(this.activeLayer);
-      let nextIndex;
-
-      if (event.key === 'ArrowLeft') {
-        nextIndex = currentIndex > 0 ? currentIndex - 1 : this.layers.length - 1;
-      } else {
-        nextIndex = currentIndex < this.layers.length - 1 ? currentIndex + 1 : 0;
-      }
-
-      this.setActiveLayer(this.layers[nextIndex]);
-    }
+  setHoverState(layer) {
+    this.hoveredLayer = layer;
+    this.updateDisplay();
   }
 
-  setActiveLayer(layer) {
-    if (this.activeLayer === layer) return;
-
-    this.activeLayer = layer;
+  clearHoverState() {
+    this.hoveredLayer = null;
     this.updateDisplay();
   }
 
   updateDisplay() {
-    this.updateLayerStates();
-    this.updateTextContent();
-  }
+    const layerWrappers = this.container.querySelectorAll('.layer-wrapper');
+    const textBlocks = this.container.querySelectorAll('.text-block');
 
-  updateLayerStates() {
-    const layerImages = this.container.querySelectorAll('.layer-image');
-    const layerButtons = this.container.querySelectorAll('.layer-button');
+    if (this.hoveredLayer) {
+      // Hover state: fade non-hovered elements
+      layerWrappers.forEach(wrapper => {
+        const layer = wrapper.dataset.layer;
+        const image = wrapper.querySelector('.layer-image');
 
-    layerImages.forEach(image => {
-      const layer = image.dataset.layer;
-      const isActive = layer === this.activeLayer;
-
-      if (isActive) {
-        image.style.transform = 'scale(1.02)';
-        image.style.filter = 'grayscale(0) brightness(1)';
-        image.style.opacity = '1';
-      } else {
-        image.style.transform = 'scale(1.0)';
-        image.style.filter = 'grayscale(1) brightness(1.15)';
-        image.style.opacity = '0.5';
-      }
-    });
-
-    layerButtons.forEach(button => {
-      const layer = button.dataset.layer;
-      button.setAttribute('aria-pressed', layer === this.activeLayer);
-    });
-  }
-
-  updateTextContent() {
-    const title = this.container.querySelector('.title');
-    const subtitle = this.container.querySelector('.subtitle');
-    const painContent = this.container.querySelector('.pain-content');
-    const valueContent = this.container.querySelector('.value-content');
-    const capabilityContent = this.container.querySelector('.capability-content');
-
-    // Fade out
-    const elements = [title, subtitle, painContent, valueContent, capabilityContent];
-    elements.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(8px)';
-    });
-
-    // Update content and fade in
-    setTimeout(() => {
-      title.textContent = this.content[this.activeLayer].title;
-      subtitle.textContent = this.content[this.activeLayer].subtitle;
-      painContent.textContent = this.content[this.activeLayer].pain;
-      valueContent.textContent = this.content[this.activeLayer].value;
-      capabilityContent.textContent = this.content[this.activeLayer].capability;
-
-      // Staggered fade in
-      elements.forEach((el, index) => {
-        setTimeout(() => {
-          el.style.transition = 'opacity 200ms ease-out, transform 200ms ease-out';
-          el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
-        }, index * 100);
+        if (layer === this.hoveredLayer) {
+          image.style.opacity = '1';
+          image.style.filter = 'none';
+          image.style.transform = 'scale(1.05)';
+        } else {
+          image.style.opacity = '0.3';
+          image.style.filter = 'grayscale(1)';
+          image.style.transform = 'scale(1)';
+        }
       });
 
-      // Restart indicator line animation
-      const line = this.container.querySelector('.line');
-      const dot = this.container.querySelector('.dot');
+      textBlocks.forEach(block => {
+        const layer = block.dataset.layer;
+        if (layer === this.hoveredLayer) {
+          block.style.opacity = '1';
+        } else {
+          block.style.opacity = '0.3';
+        }
+      });
+    } else {
+      // Default state: all elements visible
+      layerWrappers.forEach(wrapper => {
+        const image = wrapper.querySelector('.layer-image');
+        image.style.opacity = '1';
+        image.style.filter = 'none';
+        image.style.transform = 'scale(1)';
+      });
 
-      line.style.animation = 'none';
-      dot.style.animation = 'none';
-
-      setTimeout(() => {
-        line.style.animation = 'drawLine 300ms ease-out';
-        dot.style.animation = 'moveDot 400ms ease-out 150ms both';
-      }, 10);
-
-    }, 125);
+      textBlocks.forEach(block => {
+        block.style.opacity = '1';
+      });
+    }
   }
 }
 
