@@ -545,6 +545,7 @@
   display: flex;
   gap: var(--space-4);
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .publications-grid {
@@ -641,6 +642,19 @@
 
   .featured-article-image {
     height: 100%;
+  }
+
+  .featured-article h3 {
+    font-size: var(--font-size-4xl);
+  }
+
+  .featured-article-excerpt {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .featured-article .publication-logo {
+    height: 48px;
   }
 
   .newsletter-form {

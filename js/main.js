@@ -260,7 +260,6 @@ function populateInsights(insights) {
       <div class="publication-card">
         <img src="./images/publications/${pub.logo}" alt="Publication" class="publication-logo">
         <h4><a href="${pub.url}" class="publication-title-link" target="_blank">${pub.title}</a></h4>
-        <p class="publication-date">${new Date(pub.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
     `).join('');
   }
