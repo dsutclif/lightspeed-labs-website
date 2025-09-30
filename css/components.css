@@ -22,6 +22,19 @@
   border-color: var(--color-primary);
 }
 
+/* Header-specific button styling when transparent */
+.header:not(.scrolled) .btn-primary {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.header:not(.scrolled) .btn-primary:hover {
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  border-color: var(--color-white);
+}
+
 .btn-primary:hover {
   background-color: var(--color-accent-1);
   border-color: var(--color-accent-1);
@@ -173,8 +186,10 @@
 /* ==================== NAVIGATION ==================== */
 
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: var(--z-sticky);
   background-color: transparent;
   transition: background-color var(--transition-base), box-shadow var(--transition-base);
@@ -196,6 +211,11 @@
 .logo {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+
+.header.scrolled .logo {
   color: var(--color-primary);
 }
 
@@ -212,9 +232,13 @@
 
 .nav-link {
   font-weight: var(--font-weight-medium);
-  color: var(--color-charcoal);
+  color: var(--color-white);
   transition: color var(--transition-fast);
   position: relative;
+}
+
+.header.scrolled .nav-link {
+  color: var(--color-charcoal);
 }
 
 .nav-link:hover {
@@ -239,6 +263,11 @@
 .mobile-menu-toggle {
   display: block;
   font-size: var(--font-size-2xl);
+  color: var(--color-white);
+  transition: color var(--transition-fast);
+}
+
+.header.scrolled .mobile-menu-toggle {
   color: var(--color-primary);
 }
 
