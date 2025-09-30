@@ -103,7 +103,7 @@
 /* ==================== PARTNERS SECTION ==================== */
 
 .partners {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .partners-grid {
@@ -197,7 +197,7 @@
 /* ==================== IMPLEMENTATIONS SECTION ==================== */
 
 .implementations {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .implementation-grid {
@@ -346,7 +346,7 @@
 /* ==================== SECURITY SECTION ==================== */
 
 .security {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .security-grid {
@@ -670,7 +670,7 @@
 /* ==================== ABOUT/TEAM SECTION ==================== */
 
 .about {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .about-container {
