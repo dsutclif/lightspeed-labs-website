@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(ls:*)",
-      "WebFetch(domain:www.entrepreneur.com)"
+      "WebFetch(domain:www.entrepreneur.com)",
+      "WebFetch(domain:techbullion.com)"
     ],
     "deny": [],
     "ask": []
