@@ -199,6 +199,12 @@
   color: var(--color-primary);
 }
 
+.logo-image {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
 .nav-list {
   display: none;
   gap: var(--space-8);
