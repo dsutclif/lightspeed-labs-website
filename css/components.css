@@ -253,7 +253,7 @@
 
 .nav-list {
   display: none;
-  gap: var(--space-4);
+  gap: var(--space-8);
 }
 
 .nav-link {
