@@ -172,10 +172,10 @@ class SecureInformAct {
           </div>
 
           <!-- Right Side: Text Content -->
-          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace; position: relative; min-height: 400px;">
+          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace; position: relative; height: 500px; overflow: hidden;">
 
             <!-- Default State: All Value Propositions -->
-            <div class="default-state" style="display: block; min-height: 400px;">
+            <div class="default-state" style="display: block; height: 100%;
               ${this.layers.map((layer, index) => `
                 <div class="default-text-block" data-layer="${layer}"
                      style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
@@ -193,9 +193,9 @@ class SecureInformAct {
             </div>
 
             <!-- Hover State: Single Layer Details -->
-            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 400px;">
+            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto;">
               ${this.layers.map((layer, index) => `
-                <div class="hover-text-block" data-layer="${layer}" style="display: none; min-height: 400px;">
+                <div class="hover-text-block" data-layer="${layer}" style="display: none; height: 100%; overflow-y: auto; padding-right: 1rem;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
