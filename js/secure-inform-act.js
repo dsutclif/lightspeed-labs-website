@@ -276,6 +276,23 @@ class SecureInformAct {
               padding-left: 0 !important;
             }
 
+            /* Remove scrollable container on mobile */
+            .text-content {
+              height: auto !important;
+              overflow: visible !important;
+            }
+
+            .hover-state {
+              height: auto !important;
+              overflow: visible !important;
+            }
+
+            .hover-text-block {
+              height: auto !important;
+              overflow: visible !important;
+              padding: 1rem 0 !important;
+            }
+
             .text-block div {
               justify-content: flex-start !important;
             }
