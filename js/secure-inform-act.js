@@ -175,7 +175,7 @@ class SecureInformAct {
           <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace; position: relative; height: 500px; overflow: hidden;">
 
             <!-- Default State: All Value Propositions -->
-            <div class="default-state" style="display: block; height: 100%;
+            <div class="default-state" style="display: block; height: 100%;">
               ${this.layers.map((layer, index) => `
                 <div class="default-text-block" data-layer="${layer}"
                      style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
@@ -193,9 +193,9 @@ class SecureInformAct {
             </div>
 
             <!-- Hover State: Single Layer Details -->
-            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto;">
+            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); z-index: 10;">
               ${this.layers.map((layer, index) => `
-                <div class="hover-text-block" data-layer="${layer}" style="display: none; height: 100%; overflow-y: auto; padding-right: 1rem;">
+                <div class="hover-text-block" data-layer="${layer}" style="display: none; height: 100%; overflow-y: auto; padding: 2rem 2rem 2rem 0;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
@@ -203,24 +203,24 @@ class SecureInformAct {
                     </h3>
                   </div>
 
-                  <div style="padding-left: 75px; margin-top: 1rem;">
-                    <div style="margin-bottom: 2rem;">
-                      <strong style="color: #60a5fa; font-size: 1rem; letter-spacing: 0.05em;">CAPABILITY:</strong>
-                      <p style="font-size: 1.1rem; line-height: 1.8; color: #e5e7eb; margin: 0.75rem 0 0 0;">
+                  <div style="padding-left: 75px; margin-top: 2rem;">
+                    <div style="margin-bottom: 3rem;">
+                      <strong style="color: #60a5fa; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Capability:</strong>
+                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 1rem 0 0 0;">
                         ${this.content[layer].capability}
                       </p>
                     </div>
 
-                    <div style="margin-bottom: 2rem;">
-                      <strong style="color: #60a5fa; font-size: 1rem; letter-spacing: 0.05em;">FOUNDER/VC PAIN SOLVED:</strong>
-                      <p style="font-size: 1.1rem; line-height: 1.8; color: #e5e7eb; margin: 0.75rem 0 0 0;">
+                    <div style="margin-bottom: 3rem;">
+                      <strong style="color: #60a5fa; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Pain Point:</strong>
+                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 1rem 0 0 0;">
                         ${this.content[layer].pain}
                       </p>
                     </div>
 
                     <div style="margin-bottom: 2rem;">
-                      <strong style="color: #60a5fa; font-size: 1rem; letter-spacing: 0.05em;">VALUE PROPOSITION:</strong>
-                      <p style="font-size: 1.1rem; line-height: 1.8; color: #e5e7eb; margin: 0.75rem 0 0 0;">
+                      <strong style="color: #60a5fa; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Value:</strong>
+                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 1rem 0 0 0;">
                         ${this.content[layer].valueProposition}
                       </p>
                     </div>
