@@ -425,8 +425,8 @@ class SecureInformAct {
           image.style.filter = 'none';
           image.style.transform = 'scale(1.03)';
         } else {
-          image.style.opacity = '0.08';
-          image.style.filter = 'grayscale(1) brightness(0.4) contrast(0.5)';
+          image.style.opacity = '0.2';
+          image.style.filter = 'none';
           image.style.transform = 'scale(1)';
         }
       });
