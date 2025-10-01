@@ -23,7 +23,8 @@
       "Bash(find:*)",
       "Bash(npm audit:*)",
       "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/Work/Douglas Sutcliffe Consulting/AI & Agile Consulting/Lightspeed Labs Website/Images for Site/**)",
-      "Bash(dir:*)"
+      "Bash(dir:*)",
+      "Bash(findstr:*)"
     ],
     "deny": [],
     "ask": []

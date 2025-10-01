@@ -94,6 +94,9 @@
   width: 64px;
   height: 64px;
   margin-bottom: var(--space-4);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   color: var(--color-accent-1);
 }
 
