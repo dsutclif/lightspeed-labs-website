@@ -276,14 +276,16 @@ class SecureInformAct {
               padding-left: 0 !important;
             }
 
-            /* Remove scrollable container on mobile */
+            /* Remove scrollable container on mobile but maintain height stability */
             .text-content {
               height: auto !important;
+              min-height: 400px !important;
               overflow: visible !important;
             }
 
             .hover-state {
               height: auto !important;
+              min-height: 400px !important;
               overflow: visible !important;
             }
 
