@@ -154,7 +154,7 @@ class SecureInformAct {
         <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
 
           <!-- Left Side: Layered Images (Same Size, Pixel-Perfect Hover) -->
-          <div class="artwork-container" style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto; overflow: hidden;">
+          <div class="artwork-container" style="position: relative; width: 100%; max-width: 550px; aspect-ratio: 1; margin: 0 auto; overflow: hidden;">
             ${this.layers.map((layer, index) => {
               return `
               <div class="layer-wrapper" data-layer="${layer}"
@@ -165,7 +165,7 @@ class SecureInformAct {
                 </canvas>
                 <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
                      class="layer-image" data-layer="${layer}"
-                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease; pointer-events: none; transform-origin: center;">
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease; pointer-events: none; transform-origin: center; transform: scale(1);">
               </div>
             `;
             }).join('')}
@@ -423,9 +423,11 @@ class SecureInformAct {
         if (layer === this.hoveredLayer) {
           image.style.opacity = '1';
           image.style.filter = 'none';
+          image.style.transform = 'scale(1.03)';
         } else {
-          image.style.opacity = '0.15';
-          image.style.filter = 'grayscale(1) brightness(0.7)';
+          image.style.opacity = '0.08';
+          image.style.filter = 'grayscale(1) brightness(0.4) contrast(0.5)';
+          image.style.transform = 'scale(1)';
         }
       });
 
@@ -449,6 +451,7 @@ class SecureInformAct {
         const image = wrapper.querySelector('.layer-image');
         image.style.opacity = '1';
         image.style.filter = 'none';
+        image.style.transform = 'scale(1)';
       });
 
       // Show default state, hide hover state
