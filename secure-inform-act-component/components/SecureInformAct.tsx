@@ -114,12 +114,10 @@ export default function SecureInformAct({
                 animate={
                   activeLayer === layer
                     ? {
-                        scale: 1.02,
                         filter: "grayscale(0) brightness(1)",
                         opacity: 1
                       }
                     : {
-                        scale: 1.0,
                         filter: "grayscale(1) brightness(1.15)",
                         opacity: 0.5
                       }
@@ -131,14 +129,29 @@ export default function SecureInformAct({
                 }}
                 className="w-full h-full"
               >
-                <Image
-                  src={layerImages[layer]}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 560px, 80vw"
-                  priority={layer === 'secure'}
-                  style={{ objectFit: 'contain' }}
-                />
+                <motion.div
+                  animate={
+                    activeLayer === layer
+                      ? { scale: 1.02 }
+                      : { scale: 1.0 }
+                  }
+                  transition={{
+                    type: "spring",
+                    stiffness: 240,
+                    damping: 22
+                  }}
+                  className="w-full h-full"
+                  style={{ transformOrigin: 'center' }}
+                >
+                  <Image
+                    src={layerImages[layer]}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 560px, 80vw"
+                    priority={layer === 'secure'}
+                    style={{ objectFit: 'contain' }}
+                  />
+                </motion.div>
               </motion.div>
             </button>
           ))}
