@@ -156,7 +156,7 @@ class SecureInformAct {
 
         <!-- Section Header -->
         <div style="position: relative; z-index: 2; max-width: var(--container-max-width); margin: 0 auto; padding: 4rem 2rem 2rem; text-align: center;">
-          <h2 style="font-size: 3rem; font-weight: bold; color: white; margin-bottom: 1rem; letter-spacing: 0.05em;">
+          <h2 style="font-size: var(--font-size-4xl); font-weight: bold; color: white; margin-bottom: 1rem; letter-spacing: 0.05em;">
             ${this.content.sectionTitle || '3 Components of Enterprise AI'}
           </h2>
           <p style="font-size: 1.25rem; color: #e5e7eb; max-width: 800px; margin: 0 auto; line-height: 1.6;">
