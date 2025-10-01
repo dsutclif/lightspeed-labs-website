@@ -302,6 +302,44 @@ class SecureInformAct {
       }
     });
 
+    // Add hover persistence for text content area
+    const textContent = this.container.querySelector('.text-content');
+    let isOverText = false;
+
+    textContent.addEventListener('mouseenter', () => {
+      isOverText = true;
+    });
+
+    textContent.addEventListener('mouseleave', () => {
+      isOverText = false;
+    });
+
+    // Modify the artwork mousemove to respect text hover state
+    const originalMouseMove = artworkContainer.addEventListener;
+    artworkContainer.removeEventListener('mousemove', arguments.callee);
+
+    artworkContainer.addEventListener('mousemove', (e) => {
+      const rect = artworkContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Check all layers from top to bottom (SECURE -> INFORM -> ACT)
+      const detectedLayer = this.detectLayerAtPoint(x, y);
+
+      if (detectedLayer) {
+        if (this.hoveredLayer !== detectedLayer) {
+          console.log(`✓ Hover detected on ${detectedLayer} at (${Math.round(x)}, ${Math.round(y)})`);
+          this.setHoverState(detectedLayer);
+        }
+      } else {
+        // Only clear hover if not over text content
+        if (this.hoveredLayer && !isOverText) {
+          console.log('Mouse over transparent area, clearing hover');
+          this.clearHoverState();
+        }
+      }
+    });
+
     // Clear hover only when leaving the entire component
     container.addEventListener('mouseleave', () => {
       this.clearHoverState();
@@ -386,8 +424,8 @@ class SecureInformAct {
           image.style.opacity = '1';
           image.style.filter = 'none';
         } else {
-          image.style.opacity = '0.3';
-          image.style.filter = 'grayscale(1)';
+          image.style.opacity = '0.15';
+          image.style.filter = 'grayscale(1) brightness(0.7)';
         }
       });
 
