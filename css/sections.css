@@ -23,7 +23,7 @@
 
 .hero::before {
   content: '';
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -31,7 +31,7 @@
   background-image: url('../images/placeholders/hero-background-1920x1080.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: scroll;
   opacity: 0.3;
   z-index: -1;
 }
@@ -477,6 +477,8 @@
   padding: var(--space-6) 0;
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 100%;
 }
 
 .logo-strip-track {
