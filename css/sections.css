@@ -608,7 +608,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: var(--space-6);
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-8);
 }
 
 .publication-card {
@@ -887,4 +887,9 @@
   text-align: center;
   color: var(--color-white);
   font-size: var(--font-size-sm);
+}
+
+.footer-bottom p {
+  color: var(--color-white);
+  margin: 0;
 }
