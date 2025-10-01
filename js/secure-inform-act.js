@@ -250,6 +250,7 @@ class SecureInformAct {
             .secure-inform-act > div {
               grid-template-columns: 1fr !important;
               gap: 2rem !important;
+              padding: 2rem 1rem !important;
               text-align: left;
             }
 
