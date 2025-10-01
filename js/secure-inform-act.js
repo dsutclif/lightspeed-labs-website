@@ -278,17 +278,17 @@ class SecureInformAct {
 
             /* Fix height consistency on mobile - remove scrolling but maintain same height */
             .text-content {
-              height: 500px !important;
+              height: 600px !important;
               overflow: visible !important;
             }
 
             .default-state {
-              height: 500px !important;
+              height: 600px !important;
               overflow: visible !important;
             }
 
             .hover-state {
-              height: 500px !important;
+              height: 600px !important;
               overflow: visible !important;
             }
 
