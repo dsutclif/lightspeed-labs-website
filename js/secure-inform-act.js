@@ -76,7 +76,7 @@ class SecureInformAct {
     });
   }
 
-  isPixelTransparent(canvas, x, y) {
+  getPixelAlpha(canvas, x, y) {
     try {
       const ctx = canvas.getContext('2d');
       const rect = canvas.getBoundingClientRect();
@@ -89,19 +89,20 @@ class SecureInformAct {
 
       // Bounds checking
       if (canvasX < 0 || canvasY < 0 || canvasX >= canvas.width || canvasY >= canvas.height) {
-        return true;
+        return 0;
       }
 
       // Get pixel data
       const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
-      const alpha = imageData.data[3]; // Alpha channel
-
-      // More lenient alpha threshold
-      return alpha < 50; // Consider pixels with alpha < 50 as transparent
+      return imageData.data[3]; // Alpha channel
     } catch (e) {
-      console.warn('Error checking pixel transparency:', e);
-      return false; // If we can't check, assume it's not transparent
+      return 0;
     }
+  }
+
+  isPixelTransparent(canvas, x, y) {
+    const alpha = this.getPixelAlpha(canvas, x, y);
+    return alpha < 50; // Consider pixels with alpha < 50 as transparent
   }
 
   createHTML() {
@@ -121,7 +122,7 @@ class SecureInformAct {
             ${this.layers.map((layer, index) => {
               return `
               <div class="layer-wrapper" data-layer="${layer}"
-                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${10 + index};">
+                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${10 + (this.layers.length - 1 - index)};">
                 <canvas class="layer-canvas" data-layer="${layer}"
                         style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; transition: all 300ms ease; pointer-events: auto;"
                         width="500" height="500">
@@ -247,7 +248,22 @@ class SecureInformAct {
       const layer = canvas.dataset.layer;
       const wrapper = canvas.closest('.layer-wrapper');
 
-      // Pixel-perfect hover detection with pass-through
+      // Simple hover detection - test without pass-through first
+      canvas.addEventListener('mouseenter', (e) => {
+        console.log(`Mouse entered canvas for ${layer}`);
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const isTransparent = this.isPixelTransparent(canvas, x, y);
+        console.log(`${layer}: transparent=${isTransparent}, alpha=${this.getPixelAlpha(canvas, x, y)}`);
+
+        if (!isTransparent) {
+          console.log(`✓ Hover detected on ${layer}`);
+          this.setHoverState(layer);
+        }
+      });
+
       canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -256,35 +272,12 @@ class SecureInformAct {
         const isTransparent = this.isPixelTransparent(canvas, x, y);
 
         if (!isTransparent) {
-          console.log(`Hover detected on ${layer} at (${x}, ${y})`);
-          this.setHoverState(layer);
-          // Stop event propagation since we found a hit
-          e.stopPropagation();
-        } else {
-          // Make canvas transparent to mouse events when over transparent pixels
-          canvas.style.pointerEvents = 'none';
-
-          // Re-enable pointer events after a short delay
-          setTimeout(() => {
-            canvas.style.pointerEvents = 'auto';
-          }, 10);
-
-          // If this was the active layer, clear the hover state
-          if (this.hoveredLayer === layer) {
-            this.clearHoverState();
+          if (this.hoveredLayer !== layer) {
+            console.log(`✓ Hover detected on ${layer} at (${Math.round(x)}, ${Math.round(y)})`);
+            this.setHoverState(layer);
           }
-        }
-      });
-
-      // Also add mouseenter as fallback
-      canvas.addEventListener('mouseenter', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        if (!this.isPixelTransparent(canvas, x, y)) {
-          console.log(`Mouse enter detected on ${layer}`);
-          this.setHoverState(layer);
+        } else if (this.hoveredLayer === layer) {
+          this.clearHoverState();
         }
       });
 
