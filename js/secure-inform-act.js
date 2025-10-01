@@ -59,36 +59,49 @@ class SecureInformAct {
       const canvas = this.container.querySelector(`.layer-canvas[data-layer="${layer}"]`);
       const ctx = canvas.getContext('2d');
 
-      img.onload = () => {
+      const drawImage = () => {
         // Clear canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // Draw image to canvas for pixel detection
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        console.log(`Canvas setup complete for ${layer}`);
       };
 
+      img.onload = drawImage;
+
       // If image is already loaded
-      if (img.complete) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      if (img.complete && img.naturalHeight > 0) {
+        drawImage();
       }
     });
   }
 
   isPixelTransparent(canvas, x, y) {
-    const ctx = canvas.getContext('2d');
-    const rect = canvas.getBoundingClientRect();
+    try {
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
 
-    // Scale coordinates to canvas size
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    const canvasX = Math.floor(x * scaleX);
-    const canvasY = Math.floor(y * scaleY);
+      // Scale coordinates to canvas size
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const canvasX = Math.floor(x * scaleX);
+      const canvasY = Math.floor(y * scaleY);
 
-    // Get pixel data
-    const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
-    const alpha = imageData.data[3]; // Alpha channel
+      // Bounds checking
+      if (canvasX < 0 || canvasY < 0 || canvasX >= canvas.width || canvasY >= canvas.height) {
+        return true;
+      }
 
-    return alpha < 10; // Consider pixels with alpha < 10 as transparent
+      // Get pixel data
+      const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
+      const alpha = imageData.data[3]; // Alpha channel
+
+      // More lenient alpha threshold
+      return alpha < 50; // Consider pixels with alpha < 50 as transparent
+    } catch (e) {
+      console.warn('Error checking pixel transparency:', e);
+      return false; // If we can't check, assume it's not transparent
+    }
   }
 
   createHTML() {
@@ -101,7 +114,7 @@ class SecureInformAct {
         </div>
 
         <!-- Main Content Container -->
-        <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
+        <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
 
           <!-- Left Side: Layered Images (Same Size, Pixel-Perfect Hover) -->
           <div class="artwork-container" style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto;">
@@ -240,11 +253,25 @@ class SecureInformAct {
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
-        if (!this.isPixelTransparent(canvas, x, y)) {
+        const isTransparent = this.isPixelTransparent(canvas, x, y);
+
+        if (!isTransparent) {
+          console.log(`Hover detected on ${layer} at (${x}, ${y})`);
           this.setHoverState(layer);
         } else if (this.hoveredLayer === layer) {
           // Only clear if we're currently hovering this layer and hit transparent
           this.clearHoverState();
+        }
+      });
+
+      // Also add mouseenter as fallback
+      canvas.addEventListener('mouseenter', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (!this.isPixelTransparent(canvas, x, y)) {
+          this.setHoverState(layer);
         }
       });
 
