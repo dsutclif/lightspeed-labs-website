@@ -151,7 +151,7 @@ class SecureInformAct {
         </div>
 
         <!-- Main Content Container -->
-        <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
+        <div style="position: relative; z-index: 2; max-width: var(--container-max-width); margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
 
           <!-- Left Side: Layered Images (Same Size, Pixel-Perfect Hover) -->
           <div class="artwork-container" style="position: relative; width: 100%; max-width: 550px; aspect-ratio: 1; margin: 0 auto; overflow: hidden;">
@@ -246,21 +246,27 @@ class SecureInformAct {
             cursor: pointer;
           }
 
-          @media (max-width: 1024px) {
+          /* Professional responsive breakpoints */
+          @media (max-width: 768px) {
             .secure-inform-act {
-              background: none !important;
-              margin: 0 !important;
-              border: none !important;
-              outline: none !important;
+              background: url('images/Offerings Background.png') !important;
+              background-size: cover !important;
+              background-position: center !important;
             }
 
             .secure-inform-act > div {
               grid-template-columns: 1fr !important;
               gap: 2rem !important;
-              padding: 1rem 0.5rem !important;
-              max-width: 100vw !important;
-              width: 100% !important;
-              margin: 0 !important;
+              padding: 2rem 1rem !important;
+              max-width: 100% !important;
+              text-align: left;
+            }
+          }
+
+          @media (max-width: 1024px) {
+            .secure-inform-act > div {
+              grid-template-columns: 1fr !important;
+              gap: 2rem !important;
               text-align: left;
             }
 
