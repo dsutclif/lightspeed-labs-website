@@ -193,9 +193,9 @@ class SecureInformAct {
             </div>
 
             <!-- Hover State: Single Layer Details -->
-            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); z-index: 10;">
+            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow-y: auto;">
               ${this.layers.map((layer, index) => `
-                <div class="hover-text-block" data-layer="${layer}" style="display: none; height: 100%; overflow-y: auto; padding: 2rem 2rem 2rem 0;">
+                <div class="hover-text-block" data-layer="${layer}" style="display: none; height: 100%; overflow-y: auto; padding: 2rem 1rem 2rem 0;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
