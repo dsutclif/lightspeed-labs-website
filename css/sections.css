@@ -485,6 +485,10 @@
   background-color: var(--color-light-gray);
 }
 
+.insights .featured-article {
+  margin-bottom: var(--space-16);
+}
+
 /* As Featured In Logo Strip */
 .featured-in-section {
   margin-bottom: var(--space-16);
