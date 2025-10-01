@@ -325,11 +325,6 @@ function populateSecurity(securityTiers) {
         <span>${tier.bestFor}</span>
       </div>
 
-      <button class="read-more-btn" onclick="toggleSecurityDetails(${index})" aria-expanded="false">
-        <span class="read-more-text">Read More</span>
-        <span class="read-less-text" style="display: none;">Read Less</span>
-      </button>
-
       <div class="security-details" id="security-details-${index}" style="display: none;">
         <ul class="security-features">
           ${tier.features.map(feature => `<li>${feature}</li>`).join('')}
@@ -337,6 +332,10 @@ function populateSecurity(securityTiers) {
       </div>
 
       <div class="security-cta">
+        <button class="read-more-btn" onclick="toggleSecurityDetails(${index})" aria-expanded="false">
+          <span class="read-more-text">Read More</span>
+          <span class="read-less-text" style="display: none;">Read Less</span>
+        </button>
         <a href="#contact" class="btn btn-secondary btn-block">Contact Us</a>
       </div>
     </div>

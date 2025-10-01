@@ -379,7 +379,7 @@
   background-color: var(--color-white);
   border: var(--border-width-thick) solid var(--color-border);
   border-radius: var(--border-radius-lg);
-  padding: var(--space-8);
+  padding: var(--space-6);
   transition: all var(--transition-base);
   display: flex;
   flex-direction: column;
@@ -400,8 +400,9 @@
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   padding: var(--space-2) 0;
-  margin: var(--space-4) 0;
+  margin: 0;
   text-decoration: underline;
+  text-align: center;
   transition: color var(--transition-fast);
 }
 
@@ -421,6 +422,9 @@
 .security-cta {
   margin-top: auto;
   padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .security-icon {
