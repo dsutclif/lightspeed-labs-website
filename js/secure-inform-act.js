@@ -53,8 +53,10 @@ class SecureInformAct {
   }
 
   setupCanvases() {
-    // Wait for images to load, then draw them to canvases for pixel detection
-    this.layers.forEach(layer => {
+    let loadedImages = 0;
+    const totalImages = this.layers.length;
+
+    this.layers.forEach((layer, index) => {
       const img = this.container.querySelector(`.layer-image[data-layer="${layer}"]`);
       const canvas = this.container.querySelector(`.layer-canvas[data-layer="${layer}"]`);
       const ctx = canvas.getContext('2d');
@@ -64,13 +66,31 @@ class SecureInformAct {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         // Draw image to canvas for pixel detection
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        console.log(`Canvas setup complete for ${layer}`);
+
+        loadedImages++;
+        console.log(`Canvas setup complete for ${layer} (${loadedImages}/${totalImages})`);
+
+        // Test a few pixels to verify canvas has content
+        const testPixels = [
+          [canvas.width/2, canvas.height/2],
+          [canvas.width/4, canvas.height/4],
+          [canvas.width*3/4, canvas.height*3/4]
+        ];
+
+        testPixels.forEach(([x, y]) => {
+          const alpha = this.getPixelAlpha(canvas, x, y);
+          console.log(`${layer} test pixel at (${x}, ${y}): alpha=${alpha}`);
+        });
       };
 
-      img.onload = drawImage;
-
-      // If image is already loaded
-      if (img.complete && img.naturalHeight > 0) {
+      // Force image reload if needed
+      if (!img.complete || img.naturalHeight === 0) {
+        img.onload = drawImage;
+        // Force reload
+        const src = img.src;
+        img.src = '';
+        img.src = src;
+      } else {
         drawImage();
       }
     });
@@ -118,7 +138,7 @@ class SecureInformAct {
         <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
 
           <!-- Left Side: Layered Images (Same Size, Pixel-Perfect Hover) -->
-          <div class="artwork-container" style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto;">
+          <div class="artwork-container" style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto; overflow: hidden;">
             ${this.layers.map((layer, index) => {
               return `
               <div class="layer-wrapper" data-layer="${layer}"
@@ -129,7 +149,7 @@ class SecureInformAct {
                 </canvas>
                 <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
                      class="layer-image" data-layer="${layer}"
-                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease; pointer-events: none;">
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease; pointer-events: none; transform-origin: center;">
               </div>
             `;
             }).join('')}
@@ -240,54 +260,41 @@ class SecureInformAct {
   }
 
   bindEvents() {
-    const layerCanvases = this.container.querySelectorAll('.layer-canvas');
+    const artworkContainer = this.container.querySelector('.artwork-container');
     const defaultTextBlocks = this.container.querySelectorAll('.default-text-block');
     const container = this.container.querySelector('.secure-inform-act');
 
+    // Single event handler for the artwork container
+    artworkContainer.addEventListener('mousemove', (e) => {
+      const rect = artworkContainer.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Check all layers from top to bottom (SECURE -> INFORM -> ACT)
+      const detectedLayer = this.detectLayerAtPoint(x, y);
+
+      if (detectedLayer) {
+        if (this.hoveredLayer !== detectedLayer) {
+          console.log(`✓ Hover detected on ${detectedLayer} at (${Math.round(x)}, ${Math.round(y)})`);
+          this.setHoverState(detectedLayer);
+        }
+      } else {
+        if (this.hoveredLayer) {
+          console.log('Mouse over transparent area, clearing hover');
+          this.clearHoverState();
+        }
+      }
+    });
+
+    artworkContainer.addEventListener('mouseleave', () => {
+      this.clearHoverState();
+    });
+
+    // Add keyboard accessibility to canvases
+    const layerCanvases = this.container.querySelectorAll('.layer-canvas');
     layerCanvases.forEach(canvas => {
       const layer = canvas.dataset.layer;
-      const wrapper = canvas.closest('.layer-wrapper');
 
-      // Simple hover detection - test without pass-through first
-      canvas.addEventListener('mouseenter', (e) => {
-        console.log(`Mouse entered canvas for ${layer}`);
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const isTransparent = this.isPixelTransparent(canvas, x, y);
-        console.log(`${layer}: transparent=${isTransparent}, alpha=${this.getPixelAlpha(canvas, x, y)}`);
-
-        if (!isTransparent) {
-          console.log(`✓ Hover detected on ${layer}`);
-          this.setHoverState(layer);
-        }
-      });
-
-      canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const isTransparent = this.isPixelTransparent(canvas, x, y);
-
-        if (!isTransparent) {
-          if (this.hoveredLayer !== layer) {
-            console.log(`✓ Hover detected on ${layer} at (${Math.round(x)}, ${Math.round(y)})`);
-            this.setHoverState(layer);
-          }
-        } else if (this.hoveredLayer === layer) {
-          this.clearHoverState();
-        }
-      });
-
-      canvas.addEventListener('mouseleave', () => {
-        if (this.hoveredLayer === layer) {
-          this.clearHoverState();
-        }
-      });
-
-      // Keyboard accessibility
       canvas.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -317,6 +324,22 @@ class SecureInformAct {
     container.addEventListener('mouseleave', () => {
       this.clearHoverState();
     });
+  }
+
+  detectLayerAtPoint(x, y) {
+    // Check layers in z-index order (SECURE first, then INFORM, then ACT)
+    for (const layer of this.layers) {
+      const canvas = this.container.querySelector(`.layer-canvas[data-layer="${layer}"]`);
+      const alpha = this.getPixelAlpha(canvas, x, y);
+
+      console.log(`Checking ${layer}: alpha=${alpha}`);
+
+      if (alpha >= 50) { // Non-transparent pixel found
+        return layer;
+      }
+    }
+
+    return null; // No layer detected at this point
   }
 
   setHoverState(layer) {
