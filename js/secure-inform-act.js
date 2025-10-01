@@ -160,7 +160,7 @@ class SecureInformAct {
               <div class="layer-wrapper" data-layer="${layer}"
                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${10 + (this.layers.length - 1 - index)};">
                 <canvas class="layer-canvas" data-layer="${layer}"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; transition: all 300ms ease; pointer-events: auto;"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; transition: all 300ms ease; pointer-events: auto; opacity: 0;"
                         width="500" height="500">
                 </canvas>
                 <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
