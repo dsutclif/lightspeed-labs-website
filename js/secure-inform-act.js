@@ -18,18 +18,21 @@ class SecureInformAct {
     this.content = {
       secure: {
         title: "SECURE",
-        lightspeedDelivers: "Lightspeed delivers:",
-        description: "Enterprise-grade AI workspace where your data stays yours. Zero exposure. Zero hallucinations. Zero legal surprises."
+        capability: "Encrypted Cloud Environment (GCP / SOC 2 / Zero Trust / PII Redaction)",
+        pain: "\"We can't use AI because legal/security won't allow it.\" \"We're slowing ourselves down because we don't have a safe sandbox.\"",
+        valueProposition: "Enterprise-grade AI workspace where your data stays yours. Zero exposure. Zero hallucinations. Zero legal surprises."
       },
       inform: {
         title: "INFORM",
-        lightspeedDelivers: "Lightspeed delivers:",
-        description: "Central nervous system for your company's knowledge. Google Drive, email, Slack, Notion, PDFs, all instantly queryable."
+        capability: "RAG / Knowledge Fabric",
+        pain: "\"Our knowledge is scattered across 10 tools — nobody knows what the company actually knows.\" \"Every decision starts from zero.\"",
+        valueProposition: "Central nervous system for your company's knowledge — Google Drive, email, Slack, Notion, PDFs — indexed and queryable instantly."
       },
       act: {
         title: "ACT",
-        lightspeedDelivers: "Lightspeed delivers:",
-        description: "AI operators that actually do work: summarize investor updates, pull talent lists, draft reports and communications."
+        capability: "Agents / Workflow Automation",
+        pain: "\"We burn 30% of our time on manual ops: memos, recruiting, reporting, email triage.\" \"We don't need more dashboards — we need actions.\"",
+        valueProposition: "AI operators that actually do work: summarize investor updates, pull talent lists, write first drafts, move data between systems."
       }
     };
 
@@ -84,13 +87,13 @@ class SecureInformAct {
           </div>
 
           <!-- Right Side: Text Content -->
-          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace;">
-            ${this.layers.map((layer, index) => `
-              <div class="text-block" data-layer="${layer}"
-                   style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease; position: relative;">
+          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace; position: relative;">
 
-                <!-- Default State: Only "Lightspeed delivers" -->
-                <div class="default-text" style="display: block;">
+            <!-- Default State: All Value Propositions -->
+            <div class="default-state" style="display: block;">
+              ${this.layers.map((layer, index) => `
+                <div class="default-text-block" data-layer="${layer}"
+                     style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
@@ -98,24 +101,48 @@ class SecureInformAct {
                     </h3>
                   </div>
                   <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0; padding-left: 75px;">
-                    ${this.content[layer].lightspeedDelivers}
+                    ${this.content[layer].valueProposition}
                   </p>
                 </div>
+              `).join('')}
+            </div>
 
-                <!-- Hover State: Full description -->
-                <div class="hover-text" style="display: none; position: absolute; top: 0; left: 0; width: 100%;">
-                  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+            <!-- Hover State: Single Layer Details -->
+            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;">
+              ${this.layers.map((layer, index) => `
+                <div class="hover-text-block" data-layer="${layer}" style="display: none;">
+                  <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
                       ${this.content[layer].title}
                     </h3>
                   </div>
-                  <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0; padding-left: 75px;">
-                    ${this.content[layer].description}
-                  </p>
+
+                  <div style="padding-left: 75px; space-y: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem;">
+                      <strong style="color: #60a5fa; font-size: 0.9rem;">CAPABILITY:</strong>
+                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
+                        ${this.content[layer].capability}
+                      </p>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                      <strong style="color: #60a5fa; font-size: 0.9rem;">FOUNDER/VC PAIN SOLVED:</strong>
+                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
+                        ${this.content[layer].pain}
+                      </p>
+                    </div>
+
+                    <div style="margin-bottom: 1.5rem;">
+                      <strong style="color: #60a5fa; font-size: 0.9rem;">VALUE PROPOSITION:</strong>
+                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
+                        ${this.content[layer].valueProposition}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            `).join('')}
+              `).join('')}
+            </div>
           </div>
         </div>
 
@@ -165,7 +192,7 @@ class SecureInformAct {
 
   bindEvents() {
     const layerWrappers = this.container.querySelectorAll('.layer-wrapper');
-    const textBlocks = this.container.querySelectorAll('.text-block');
+    const defaultTextBlocks = this.container.querySelectorAll('.default-text-block');
     const container = this.container.querySelector('.secure-inform-act');
 
     layerWrappers.forEach(wrapper => {
@@ -192,8 +219,8 @@ class SecureInformAct {
       wrapper.setAttribute('aria-label', `View ${this.content[layer].title} details`);
     });
 
-    // Also bind to text blocks for cross-interaction
-    textBlocks.forEach(block => {
+    // Also bind to default text blocks for cross-interaction
+    defaultTextBlocks.forEach(block => {
       const layer = block.dataset.layer;
 
       block.addEventListener('mouseenter', () => {
@@ -223,10 +250,13 @@ class SecureInformAct {
 
   updateDisplay() {
     const layerWrappers = this.container.querySelectorAll('.layer-wrapper');
-    const textBlocks = this.container.querySelectorAll('.text-block');
+    const defaultState = this.container.querySelector('.default-state');
+    const hoverState = this.container.querySelector('.hover-state');
+    const defaultTextBlocks = this.container.querySelectorAll('.default-text-block');
+    const hoverTextBlocks = this.container.querySelectorAll('.hover-text-block');
 
     if (this.hoveredLayer) {
-      // Hover state: fade non-hovered elements, show full description for hovered
+      // Hover state: fade non-hovered images, show single layer details
       layerWrappers.forEach(wrapper => {
         const layer = wrapper.dataset.layer;
         const image = wrapper.querySelector('.layer-image');
@@ -242,25 +272,22 @@ class SecureInformAct {
         }
       });
 
-      textBlocks.forEach(block => {
-        const layer = block.dataset.layer;
-        const defaultText = block.querySelector('.default-text');
-        const hoverText = block.querySelector('.hover-text');
+      // Hide default state, show hover state
+      defaultState.style.display = 'none';
+      hoverState.style.display = 'block';
 
+      // Show only the hovered layer's details
+      hoverTextBlocks.forEach(block => {
+        const layer = block.dataset.layer;
         if (layer === this.hoveredLayer) {
-          // Show full description for hovered layer
-          block.style.opacity = '1';
-          defaultText.style.display = 'none';
-          hoverText.style.display = 'block';
+          block.style.display = 'block';
         } else {
-          // Hide non-hovered layers
-          block.style.opacity = '0.3';
-          defaultText.style.display = 'block';
-          hoverText.style.display = 'none';
+          block.style.display = 'none';
         }
       });
+
     } else {
-      // Default state: all elements visible with "Lightspeed delivers" text
+      // Default state: all rings visible, show all value propositions
       layerWrappers.forEach(wrapper => {
         const image = wrapper.querySelector('.layer-image');
         image.style.opacity = '1';
@@ -268,13 +295,13 @@ class SecureInformAct {
         image.style.transform = 'scale(1)';
       });
 
-      textBlocks.forEach(block => {
-        const defaultText = block.querySelector('.default-text');
-        const hoverText = block.querySelector('.hover-text');
+      // Show default state, hide hover state
+      defaultState.style.display = 'block';
+      hoverState.style.display = 'none';
 
+      // Ensure all default text blocks are visible
+      defaultTextBlocks.forEach(block => {
         block.style.opacity = '1';
-        defaultText.style.display = 'block';
-        hoverText.style.display = 'none';
       });
     }
   }

@@ -16,7 +16,10 @@
       "Bash(vercel:*)",
       "Bash(npm run build:*)",
       "Bash(python:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/delete/**)"
     ],
     "deny": [],
     "ask": []
