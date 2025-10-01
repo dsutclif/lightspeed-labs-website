@@ -203,24 +203,24 @@ class SecureInformAct {
                     </h3>
                   </div>
 
-                  <div style="padding-left: 75px; margin-top: 2rem;">
-                    <div style="margin-bottom: 3rem;">
+                  <div style="padding-left: 75px; margin-top: 1.5rem;">
+                    <div style="margin-bottom: 1.5rem;">
                       <strong style="color: #60a5fa; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Capability:</strong>
-                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 1rem 0 0 0;">
+                      <p style="font-size: 0.95rem; line-height: 1.5; color: #e5e7eb; margin: 0.5rem 0 0 0;">
                         ${this.content[layer].capability}
                       </p>
                     </div>
 
-                    <div style="margin-bottom: 3rem;">
+                    <div style="margin-bottom: 1.5rem;">
                       <strong style="color: #60a5fa; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Pain Point:</strong>
-                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 1rem 0 0 0;">
+                      <p style="font-size: 0.95rem; line-height: 1.5; color: #e5e7eb; margin: 0.5rem 0 0 0;">
                         ${this.content[layer].pain}
                       </p>
                     </div>
 
-                    <div style="margin-bottom: 2rem;">
+                    <div style="margin-bottom: 1rem;">
                       <strong style="color: #60a5fa; font-size: 0.9rem; letter-spacing: 0.05em; text-transform: uppercase;">Value:</strong>
-                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 1rem 0 0 0;">
+                      <p style="font-size: 0.95rem; line-height: 1.5; color: #e5e7eb; margin: 0.5rem 0 0 0;">
                         ${this.content[layer].valueProposition}
                       </p>
                     </div>
@@ -302,7 +302,8 @@ class SecureInformAct {
       }
     });
 
-    artworkContainer.addEventListener('mouseleave', () => {
+    // Clear hover only when leaving the entire component
+    container.addEventListener('mouseleave', () => {
       this.clearHoverState();
     });
 
