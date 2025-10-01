@@ -295,6 +295,8 @@
     "callout": "We're a boutique firm that can scale. Solo founder for close partnership, with access to specialized talent when your project demands it."
   },
   "secureInformAct": {
+    "sectionTitle": "3 Components of Enterprise AI",
+    "sectionSubtitle": "Every company wants to \"use AI,\" but very few are set up to do it responsibly and effectively. Real AI adoption isn't just picking tools — it requires building the right layers in the right order.",
     "secure": {
       "title": "SECURE",
       "capability": "Encrypted Cloud Environment (GCP / SOC 2 / Zero Trust / PII Redaction)",

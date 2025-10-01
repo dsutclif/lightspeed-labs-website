@@ -51,7 +51,11 @@ class SecureInformAct {
       const siteContent = await response.json();
 
       if (siteContent.secureInformAct) {
-        this.content = siteContent.secureInformAct;
+        this.content = {
+          sectionTitle: siteContent.secureInformAct.sectionTitle || '3 Components of Enterprise AI',
+          sectionSubtitle: siteContent.secureInformAct.sectionSubtitle || 'Every company wants to "use AI," but very few are set up to do it responsibly and effectively.',
+          ...siteContent.secureInformAct
+        };
         console.log('SecureInformAct content loaded from JSON');
       }
     } catch (error) {
@@ -150,8 +154,18 @@ class SecureInformAct {
                style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7;">
         </div>
 
+        <!-- Section Header -->
+        <div style="position: relative; z-index: 2; max-width: var(--container-max-width); margin: 0 auto; padding: 4rem 2rem 2rem; text-align: center;">
+          <h2 style="font-size: 3rem; font-weight: bold; color: white; margin-bottom: 1rem; letter-spacing: 0.05em;">
+            ${this.content.sectionTitle || '3 Components of Enterprise AI'}
+          </h2>
+          <p style="font-size: 1.25rem; color: #e5e7eb; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+            ${this.content.sectionSubtitle || 'Every company wants to "use AI," but very few are set up to do it responsibly and effectively. Real AI adoption isn\'t just picking tools — it requires building the right layers in the right order.'}
+          </p>
+        </div>
+
         <!-- Main Content Container -->
-        <div style="position: relative; z-index: 2; max-width: var(--container-max-width); margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
+        <div style="position: relative; z-index: 2; max-width: var(--container-max-width); margin: 0 auto; padding: 2rem 2rem 4rem; min-height: 60vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start;">
 
           <!-- Left Side: Layered Images (Same Size, Pixel-Perfect Hover) -->
           <div class="artwork-container" style="position: relative; width: 100%; max-width: 550px; aspect-ratio: 1; margin: 0 auto; overflow: hidden;">
