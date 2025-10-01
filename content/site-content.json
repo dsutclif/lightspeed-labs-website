@@ -27,7 +27,7 @@
   "partners": [
     {
       "id": "vc",
-      "icon": "icon-vc-256x256.svg",
+      "icon": "vc-icon.png",
       "headline": "Venture Capital & Investment Firms",
       "description": "Automate investment memo generation, email triage, and founder outreach. Process 100% of opportunities in under 24 hours while maintaining bank-vault security.",
       "benefits": [
@@ -38,7 +38,7 @@
     },
     {
       "id": "startup",
-      "icon": "icon-startup-256x256.svg",
+      "icon": "startup-icon.png",
       "headline": "Technology Startups",
       "description": "Scale operations without scaling headcount. Build AI-powered systems that handle customer support, data processing, and internal workflows with enterprise reliability.",
       "benefits": [
@@ -49,7 +49,7 @@
     },
     {
       "id": "digital",
-      "icon": "icon-digital-256x256.svg",
+      "icon": "pre-ai-org-icon.png",
       "headline": "Organizations with Low AI Adoption",
       "description": "Transform email management, document processing, and customer workflows with AI that understands context and learns from your business.",
       "benefits": [

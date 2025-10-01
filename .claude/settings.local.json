@@ -21,7 +21,9 @@
       "Bash(git push:*)",
       "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/delete/**)",
       "Bash(find:*)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Read(//c/Users/dougl/OneDrive - Massachusetts Institute of Technology/Desktop/Work/Douglas Sutcliffe Consulting/AI & Agile Consulting/Lightspeed Labs Website/Images for Site/**)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []
