@@ -181,7 +181,7 @@ class SecureInformAct {
                      style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
-                    <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
+                    <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0; color: #60a5fa;">
                       ${this.content[layer].title}
                     </h3>
                   </div>
@@ -198,7 +198,7 @@ class SecureInformAct {
                 <div class="hover-text-block" data-layer="${layer}" style="display: none; height: 100%; overflow-y: auto; padding: 2rem 1rem 2rem 0;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
-                    <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
+                    <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0; color: #60a5fa;">
                       ${this.content[layer].title}
                     </h3>
                   </div>
