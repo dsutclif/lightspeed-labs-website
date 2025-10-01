@@ -384,11 +384,9 @@ class SecureInformAct {
         if (layer === this.hoveredLayer) {
           image.style.opacity = '1';
           image.style.filter = 'none';
-          image.style.transform = 'scale(1.05)';
         } else {
           image.style.opacity = '0.3';
           image.style.filter = 'grayscale(1)';
-          image.style.transform = 'scale(1)';
         }
       });
 
@@ -412,7 +410,6 @@ class SecureInformAct {
         const image = wrapper.querySelector('.layer-image');
         image.style.opacity = '1';
         image.style.filter = 'none';
-        image.style.transform = 'scale(1)';
       });
 
       // Show default state, hide hover state
