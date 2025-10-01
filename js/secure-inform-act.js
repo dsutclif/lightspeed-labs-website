@@ -123,7 +123,7 @@ class SecureInformAct {
               <div class="layer-wrapper" data-layer="${layer}"
                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${10 + index};">
                 <canvas class="layer-canvas" data-layer="${layer}"
-                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; transition: all 300ms ease;"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; transition: all 300ms ease; pointer-events: auto;"
                         width="500" height="500">
                 </canvas>
                 <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
@@ -247,7 +247,7 @@ class SecureInformAct {
       const layer = canvas.dataset.layer;
       const wrapper = canvas.closest('.layer-wrapper');
 
-      // Pixel-perfect hover detection
+      // Pixel-perfect hover detection with pass-through
       canvas.addEventListener('mousemove', (e) => {
         const rect = canvas.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -258,9 +258,21 @@ class SecureInformAct {
         if (!isTransparent) {
           console.log(`Hover detected on ${layer} at (${x}, ${y})`);
           this.setHoverState(layer);
-        } else if (this.hoveredLayer === layer) {
-          // Only clear if we're currently hovering this layer and hit transparent
-          this.clearHoverState();
+          // Stop event propagation since we found a hit
+          e.stopPropagation();
+        } else {
+          // Make canvas transparent to mouse events when over transparent pixels
+          canvas.style.pointerEvents = 'none';
+
+          // Re-enable pointer events after a short delay
+          setTimeout(() => {
+            canvas.style.pointerEvents = 'auto';
+          }, 10);
+
+          // If this was the active layer, clear the hover state
+          if (this.hoveredLayer === layer) {
+            this.clearHoverState();
+          }
         }
       });
 
@@ -271,6 +283,7 @@ class SecureInformAct {
         const y = e.clientY - rect.top;
 
         if (!this.isPixelTransparent(canvas, x, y)) {
+          console.log(`Mouse enter detected on ${layer}`);
           this.setHoverState(layer);
         }
       });
