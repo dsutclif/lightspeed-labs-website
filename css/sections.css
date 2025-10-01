@@ -370,6 +370,9 @@
   border-radius: var(--border-radius-lg);
   padding: var(--space-8);
   transition: all var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .security-tier:hover {
@@ -402,6 +405,11 @@
 
 .security-details {
   margin: var(--space-4) 0;
+}
+
+.security-cta {
+  margin-top: auto;
+  padding-top: var(--space-4);
 }
 
 .security-icon {

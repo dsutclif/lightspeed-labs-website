@@ -336,7 +336,9 @@ function populateSecurity(securityTiers) {
         </ul>
       </div>
 
-      <a href="#contact" class="btn btn-secondary btn-block">Contact Us</a>
+      <div class="security-cta">
+        <a href="#contact" class="btn btn-secondary btn-block">Contact Us</a>
+      </div>
     </div>
   `).join('');
 }
