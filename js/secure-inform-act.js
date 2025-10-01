@@ -250,7 +250,7 @@ class SecureInformAct {
             .secure-inform-act > div {
               grid-template-columns: 1fr !important;
               gap: 2rem !important;
-              text-align: center;
+              text-align: left;
             }
 
             .artwork-container {
@@ -267,7 +267,7 @@ class SecureInformAct {
             }
 
             .text-block div {
-              justify-content: center !important;
+              justify-content: flex-start !important;
             }
           }
         </style>
@@ -372,6 +372,16 @@ class SecureInformAct {
 
       block.addEventListener('mouseleave', () => {
         this.clearHoverState();
+      });
+    });
+
+    // Add hover events to hover text blocks as well
+    const hoverTextBlocks = this.container.querySelectorAll('.hover-text-block');
+    hoverTextBlocks.forEach(block => {
+      const layer = block.dataset.layer;
+
+      block.addEventListener('mouseenter', () => {
+        this.setHoverState(layer);
       });
     });
 
