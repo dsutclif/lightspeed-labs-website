@@ -47,8 +47,48 @@ class SecureInformAct {
 
   init() {
     this.createHTML();
+    this.setupCanvases();
     this.bindEvents();
     this.updateDisplay();
+  }
+
+  setupCanvases() {
+    // Wait for images to load, then draw them to canvases for pixel detection
+    this.layers.forEach(layer => {
+      const img = this.container.querySelector(`.layer-image[data-layer="${layer}"]`);
+      const canvas = this.container.querySelector(`.layer-canvas[data-layer="${layer}"]`);
+      const ctx = canvas.getContext('2d');
+
+      img.onload = () => {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Draw image to canvas for pixel detection
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+
+      // If image is already loaded
+      if (img.complete) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      }
+    });
+  }
+
+  isPixelTransparent(canvas, x, y) {
+    const ctx = canvas.getContext('2d');
+    const rect = canvas.getBoundingClientRect();
+
+    // Scale coordinates to canvas size
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const canvasX = Math.floor(x * scaleX);
+    const canvasY = Math.floor(y * scaleY);
+
+    // Get pixel data
+    const imageData = ctx.getImageData(canvasX, canvasY, 1, 1);
+    const alpha = imageData.data[3]; // Alpha channel
+
+    return alpha < 10; // Consider pixels with alpha < 10 as transparent
   }
 
   createHTML() {
@@ -63,24 +103,19 @@ class SecureInformAct {
         <!-- Main Content Container -->
         <div style="position: relative; z-index: 2; max-width: 1400px; margin: 0 auto; padding: 4rem 2rem; min-height: 80vh; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;">
 
-          <!-- Left Side: Layered Images (Properly Sized) -->
+          <!-- Left Side: Layered Images (Same Size, Pixel-Perfect Hover) -->
           <div class="artwork-container" style="position: relative; width: 100%; max-width: 500px; aspect-ratio: 1; margin: 0 auto;">
             ${this.layers.map((layer, index) => {
-              // Different sizes for each layer to match the reference image
-              const sizes = {
-                'secure': { width: '100%', height: '100%' },  // Outermost ring - largest
-                'inform': { width: '80%', height: '80%' },    // Middle ring
-                'act': { width: '60%', height: '60%' }        // Inner ring - smallest
-              };
-              const size = sizes[layer];
-
               return `
               <div class="layer-wrapper" data-layer="${layer}"
-                   style="position: absolute; top: 50%; left: 50%; width: ${size.width}; height: ${size.height};
-                          transform: translate(-50%, -50%); cursor: pointer; z-index: ${10 + index};">
+                   style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${10 + index};">
+                <canvas class="layer-canvas" data-layer="${layer}"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; cursor: pointer; transition: all 300ms ease;"
+                        width="500" height="500">
+                </canvas>
                 <img src="${this.layerImages[layer]}" alt="${this.content[layer].title} layer"
                      class="layer-image" data-layer="${layer}"
-                     style="width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease;">
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; transition: all 300ms ease; pointer-events: none;">
               </div>
             `;
             }).join('')}
@@ -111,14 +146,14 @@ class SecureInformAct {
             <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;">
               ${this.layers.map((layer, index) => `
                 <div class="hover-text-block" data-layer="${layer}" style="display: none;">
-                  <div style="display: flex; align-items: center; margin-bottom: 1.5rem;">
+                  <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
                       ${this.content[layer].title}
                     </h3>
                   </div>
 
-                  <div style="padding-left: 75px; space-y: 1.5rem;">
+                  <div style="padding-left: 75px; margin-top: 1rem;">
                     <div style="margin-bottom: 1.5rem;">
                       <strong style="color: #60a5fa; font-size: 0.9rem;">CAPABILITY:</strong>
                       <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
@@ -191,32 +226,45 @@ class SecureInformAct {
   }
 
   bindEvents() {
-    const layerWrappers = this.container.querySelectorAll('.layer-wrapper');
+    const layerCanvases = this.container.querySelectorAll('.layer-canvas');
     const defaultTextBlocks = this.container.querySelectorAll('.default-text-block');
     const container = this.container.querySelector('.secure-inform-act');
 
-    layerWrappers.forEach(wrapper => {
-      const layer = wrapper.dataset.layer;
+    layerCanvases.forEach(canvas => {
+      const layer = canvas.dataset.layer;
+      const wrapper = canvas.closest('.layer-wrapper');
 
-      wrapper.addEventListener('mouseenter', () => {
-        this.setHoverState(layer);
+      // Pixel-perfect hover detection
+      canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (!this.isPixelTransparent(canvas, x, y)) {
+          this.setHoverState(layer);
+        } else if (this.hoveredLayer === layer) {
+          // Only clear if we're currently hovering this layer and hit transparent
+          this.clearHoverState();
+        }
       });
 
-      wrapper.addEventListener('mouseleave', () => {
-        this.clearHoverState();
+      canvas.addEventListener('mouseleave', () => {
+        if (this.hoveredLayer === layer) {
+          this.clearHoverState();
+        }
       });
 
       // Keyboard accessibility
-      wrapper.addEventListener('keydown', (e) => {
+      canvas.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           this.setHoverState(layer);
         }
       });
 
-      wrapper.setAttribute('tabindex', '0');
-      wrapper.setAttribute('role', 'button');
-      wrapper.setAttribute('aria-label', `View ${this.content[layer].title} details`);
+      canvas.setAttribute('tabindex', '0');
+      canvas.setAttribute('role', 'button');
+      canvas.setAttribute('aria-label', `View ${this.content[layer].title} details`);
     });
 
     // Also bind to default text blocks for cross-interaction
