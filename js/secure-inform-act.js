@@ -266,6 +266,16 @@ class SecureInformAct {
               padding-left: 0 !important;
             }
 
+            /* Remove padding from hover text content */
+            .hover-text-block > div {
+              padding-left: 0 !important;
+            }
+
+            /* Remove padding from default text content */
+            .default-text-block p {
+              padding-left: 0 !important;
+            }
+
             .text-block div {
               justify-content: flex-start !important;
             }
