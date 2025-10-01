@@ -72,8 +72,8 @@
 
   --container-max-width: 1280px;
   --container-padding: var(--space-6);
-  --section-padding: var(--space-20);
-  --section-padding-mobile: var(--space-12);
+  --section-padding: 2.5rem;  /* 40px - reduced from 80px */
+  --section-padding-mobile: 1.5rem;  /* 24px - reduced from 48px */
 
   /* ==================== BORDERS ==================== */
 
