@@ -306,28 +306,68 @@ function populateMethodology(methodology) {
   }
 }
 
-// Populate security section
+/**
+ * Populate security section with collapsible details
+ * @function populateSecurity
+ * @param {Array} securityTiers - Array of security tier objects
+ */
 function populateSecurity(securityTiers) {
   const securityGrid = document.querySelector('.security-grid');
   if (!securityGrid || !securityTiers) return;
 
-  securityGrid.innerHTML = securityTiers.map(tier => `
-    <div class="security-tier ${tier.recommended ? 'recommended' : ''}">
+  securityGrid.innerHTML = securityTiers.map((tier, index) => `
+    <div class="security-tier">
       <img src="./images/icons/${tier.icon}" alt="${tier.tier}" class="security-icon">
       <h3>${tier.tier}</h3>
-      <p class="text-muted mb-4">${tier.level}</p>
-      <ul class="security-features">
-        ${tier.features.map(feature => `<li>${feature}</li>`).join('')}
-      </ul>
+
       <div class="security-best-for">
         <strong>Best For:</strong>
         <span>${tier.bestFor}</span>
       </div>
-      <p class="security-pricing">${tier.pricing}</p>
+
+      <button class="read-more-btn" onclick="toggleSecurityDetails(${index})" aria-expanded="false">
+        <span class="read-more-text">Read More</span>
+        <span class="read-less-text" style="display: none;">Read Less</span>
+      </button>
+
+      <div class="security-details" id="security-details-${index}" style="display: none;">
+        <ul class="security-features">
+          ${tier.features.map(feature => `<li>${feature}</li>`).join('')}
+        </ul>
+      </div>
+
       <a href="#contact" class="btn btn-secondary btn-block">Contact Us</a>
     </div>
   `).join('');
 }
+
+/**
+ * Toggle security tier details visibility
+ * @function toggleSecurityDetails
+ * @param {number} index - Index of the security tier
+ */
+function toggleSecurityDetails(index) {
+  const details = document.getElementById(`security-details-${index}`);
+  const button = details.previousElementSibling;
+  const readMoreText = button.querySelector('.read-more-text');
+  const readLessText = button.querySelector('.read-less-text');
+  const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+  if (isExpanded) {
+    details.style.display = 'none';
+    button.setAttribute('aria-expanded', 'false');
+    readMoreText.style.display = 'inline';
+    readLessText.style.display = 'none';
+  } else {
+    details.style.display = 'block';
+    button.setAttribute('aria-expanded', 'true');
+    readMoreText.style.display = 'none';
+    readLessText.style.display = 'inline';
+  }
+}
+
+// Make toggleSecurityDetails available globally
+window.toggleSecurityDetails = toggleSecurityDetails;
 
 // Populate insights section
 function populateInsights(insights) {

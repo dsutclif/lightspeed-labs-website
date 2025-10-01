@@ -378,24 +378,30 @@
   box-shadow: var(--shadow-xl);
 }
 
-.security-tier.recommended {
-  border-color: var(--color-accent-1);
-  position: relative;
+/* Read More Button Styling */
+.read-more-btn {
+  background: none;
+  border: none;
+  color: var(--color-accent-1);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  padding: var(--space-2) 0;
+  margin: var(--space-4) 0;
+  text-decoration: underline;
+  transition: color var(--transition-fast);
 }
 
-.security-tier.recommended::before {
-  content: 'RECOMMENDED';
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: var(--color-accent-1);
-  color: var(--color-white);
-  padding: var(--space-1) var(--space-3);
-  border-radius: var(--border-radius-full);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.05em;
+.read-more-btn:hover {
+  color: var(--color-primary);
+}
+
+.read-more-btn:focus {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+}
+
+.security-details {
+  margin: var(--space-4) 0;
 }
 
 .security-icon {
@@ -444,11 +450,6 @@
   color: var(--color-primary);
 }
 
-.security-pricing {
-  text-align: center;
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-secondary);
-}
 
 /* ==================== FEATURED IN TICKER SECTION ==================== */
 
