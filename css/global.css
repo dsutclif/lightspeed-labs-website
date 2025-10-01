@@ -1,6 +1,9 @@
 /**
  * Global Styles & Resets
  * Base styles, typography, and utility classes
+ *
+ * CRITICAL CSS: Lines 1-150 contain above-the-fold styles
+ * These should be inlined for optimal performance
  */
 
 /* ==================== MODERN RESET ==================== */
@@ -223,6 +226,56 @@ input:focus, textarea:focus, select:focus {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+/* Skip Navigation Links */
+.skip-nav-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  z-index: 1000;
+  padding: 8px 16px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: var(--font-weight-semibold);
+  transition: top 0.3s ease;
+}
+
+.skip-nav-link:focus {
+  top: 6px;
+}
+
+/* Focus Indicators */
+*:focus {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+}
+
+/* Remove default button outline and add custom */
+button:focus,
+.btn:focus {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+}
+
+/* Form focus indicators */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+  border-color: var(--color-accent-1);
+}
+
+/* Link focus indicators */
+a:focus {
+  outline: 2px solid var(--color-accent-1);
+  outline-offset: 2px;
+  text-decoration: underline;
 }
 
 /* ==================== RESPONSIVE TYPOGRAPHY ==================== */

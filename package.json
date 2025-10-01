@@ -1,0 +1,45 @@
+{
+  "name": "lightspeed-labs-website",
+  "version": "1.0.0",
+  "description": "AI Workflow Automation Consulting Website",
+  "main": "js/main.js",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "lint": "eslint js/**/*.js",
+    "lint:fix": "eslint js/**/*.js --fix",
+    "format": "prettier --write \"**/*.{js,css,html,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,css,html,json,md}\"",
+    "optimize:images": "echo 'Image optimization requires additional tooling'",
+    "validate:html": "echo 'HTML validation requires additional tooling'",
+    "test": "echo 'Tests will be added in future phases'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dsutclif/lightspeed-labs-website.git"
+  },
+  "keywords": [
+    "ai",
+    "automation",
+    "consulting",
+    "workflow",
+    "lightspeed-labs"
+  ],
+  "author": "Doug Sutcliffe <info@lightspeed-labs.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dsutclif/lightspeed-labs-website/issues"
+  },
+  "homepage": "https://lightspeedlabs.consulting",
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

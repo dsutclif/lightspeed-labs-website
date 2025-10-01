@@ -1,22 +1,46 @@
 /**
- * Main JavaScript
- * Initialization and navigation
+ * @fileoverview Main JavaScript module for Lightspeed Labs website
+ * Handles navigation, mobile menu, and dynamic content loading from JSON
+ * @version 1.0.0
+ * @author Doug Sutcliffe
  */
 
 import { smoothScroll, throttle, loadContent } from './utils.js';
 import { initScrollAnimations } from './scroll-animations.js';
 import { initForms } from './forms.js';
 
-// Initialize everything when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  initNavigation();
-  initMobileMenu();
-  loadDynamicContent();
-  initScrollAnimations();
-  initForms();
+// Global error handler for unhandled errors
+window.addEventListener('error', (event) => {
+  console.error('Global error caught:', event.error);
+  // In production, this could be sent to error tracking service
 });
 
-// Navigation functionality
+// Global error handler for unhandled promise rejections
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('Unhandled promise rejection:', event.reason);
+  // In production, this could be sent to error tracking service
+});
+
+/**
+ * Initialize everything when DOM is ready with error handling
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    initNavigation();
+    initMobileMenu();
+    loadDynamicContent();
+    initScrollAnimations();
+    initForms();
+  } catch (error) {
+    console.error('Error during initialization:', error);
+    // Graceful degradation - site still functions without JS enhancements
+  }
+});
+
+/**
+ * Initialize navigation functionality including scroll effects and smooth scrolling
+ * @function initNavigation
+ */
 function initNavigation() {
   const header = document.querySelector('.header');
 
@@ -54,7 +78,10 @@ function initNavigation() {
   });
 }
 
-// Mobile menu functionality
+/**
+ * Initialize mobile menu functionality with event listeners
+ * @function initMobileMenu
+ */
 function initMobileMenu() {
   const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
   const mobileNav = document.querySelector('.mobile-nav');
@@ -74,19 +101,32 @@ function initMobileMenu() {
   });
 }
 
+/**
+ * Open the mobile navigation menu and prevent body scrolling
+ * @function openMobileMenu
+ */
 function openMobileMenu() {
   const mobileNav = document.querySelector('.mobile-nav');
   mobileNav.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
 
+/**
+ * Close the mobile navigation menu and restore body scrolling
+ * @function closeMobileMenu
+ */
 function closeMobileMenu() {
   const mobileNav = document.querySelector('.mobile-nav');
   mobileNav.classList.remove('active');
   document.body.style.overflow = '';
 }
 
-// Load dynamic content from JSON
+/**
+ * Load and populate dynamic content from JSON configuration
+ * @async
+ * @function loadDynamicContent
+ * @returns {Promise<void>}
+ */
 async function loadDynamicContent() {
   const content = await loadContent('./content/site-content.json');
 
@@ -126,7 +166,16 @@ async function loadDynamicContent() {
   populateAbout(content.about);
 }
 
-// Populate hero section
+/**
+ * Populate the hero section with content from JSON
+ * @function populateHero
+ * @param {Object} hero - Hero section content object
+ * @param {string} hero.headline - Main headline text
+ * @param {string} hero.description - Description text
+ * @param {string} hero.cta_primary - Primary CTA button text
+ * @param {string} hero.cta_secondary - Secondary CTA button text
+ * @param {string[]} hero.trust_badges - Array of trust badge texts
+ */
 function populateHero(hero) {
   const heroContent = document.querySelector('.hero-content');
   if (!heroContent || !hero) return;
