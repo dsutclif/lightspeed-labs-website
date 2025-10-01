@@ -293,5 +293,25 @@
       "Network of 20+ specialized consultants for scaled projects"
     ],
     "callout": "We're a boutique firm that can scale. Solo founder for close partnership, with access to specialized talent when your project demands it."
+  },
+  "secureInformAct": {
+    "secure": {
+      "title": "SECURE",
+      "capability": "Encrypted Cloud Environment (GCP / SOC 2 / Zero Trust / PII Redaction)",
+      "pain": "\"We can't use AI because legal/security won't allow it.\" \"We're slowing ourselves down because we don't have a safe sandbox.\"",
+      "valueProposition": "Enterprise-grade AI workspace where your data stays yours. Zero exposure. Zero hallucinations. Zero legal surprises."
+    },
+    "inform": {
+      "title": "INFORM",
+      "capability": "RAG / Knowledge Fabric",
+      "pain": "\"Our knowledge is scattered across 10 tools — nobody knows what the company actually knows.\" \"Every decision starts from zero.\"",
+      "valueProposition": "Central nervous system for your company's knowledge — Google Drive, email, Slack, Notion, PDFs — indexed and queryable instantly."
+    },
+    "act": {
+      "title": "ACT",
+      "capability": "Agents / Workflow Automation",
+      "pain": "\"We burn 30% of our time on manual ops: memos, recruiting, reporting, email triage.\" \"We don't need more dashboards — we need actions.\"",
+      "valueProposition": "AI operators that actually do work: summarize investor updates, pull talent lists, write first drafts, move data between systems."
+    }
   }
 }

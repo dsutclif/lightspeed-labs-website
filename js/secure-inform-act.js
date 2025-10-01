@@ -14,7 +14,7 @@ class SecureInformAct {
       damping: 22
     };
 
-    // Content data
+    // Default content (fallback if JSON fails to load)
     this.content = {
       secure: {
         title: "SECURE",
@@ -41,6 +41,22 @@ class SecureInformAct {
       inform: 'images/Offerings Inform.png',
       act: 'images/Offerings Act.png'
     };
+
+    this.loadContentAndInit();
+  }
+
+  async loadContentAndInit() {
+    try {
+      const response = await fetch('./content/site-content.json');
+      const siteContent = await response.json();
+
+      if (siteContent.secureInformAct) {
+        this.content = siteContent.secureInformAct;
+        console.log('SecureInformAct content loaded from JSON');
+      }
+    } catch (error) {
+      console.warn('Could not load content from JSON, using defaults:', error);
+    }
 
     this.init();
   }
@@ -156,10 +172,10 @@ class SecureInformAct {
           </div>
 
           <!-- Right Side: Text Content -->
-          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace; position: relative;">
+          <div class="text-content" style="color: white; font-family: 'Space Mono', 'Courier New', monospace; position: relative; min-height: 400px;">
 
             <!-- Default State: All Value Propositions -->
-            <div class="default-state" style="display: block;">
+            <div class="default-state" style="display: block; min-height: 400px;">
               ${this.layers.map((layer, index) => `
                 <div class="default-text-block" data-layer="${layer}"
                      style="margin-bottom: 3rem; opacity: 1; transition: opacity 300ms ease;">
@@ -177,9 +193,9 @@ class SecureInformAct {
             </div>
 
             <!-- Hover State: Single Layer Details -->
-            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 100%;">
+            <div class="hover-state" style="display: none; position: absolute; top: 0; left: 0; width: 100%; min-height: 400px;">
               ${this.layers.map((layer, index) => `
-                <div class="hover-text-block" data-layer="${layer}" style="display: none;">
+                <div class="hover-text-block" data-layer="${layer}" style="display: none; min-height: 400px;">
                   <div style="display: flex; align-items: center; margin-bottom: 1rem;">
                     <div style="width: 60px; height: 2px; background: #60a5fa; margin-right: 1rem;"></div>
                     <h3 style="font-size: 2rem; font-weight: bold; letter-spacing: 0.1em; margin: 0;">
@@ -188,23 +204,23 @@ class SecureInformAct {
                   </div>
 
                   <div style="padding-left: 75px; margin-top: 1rem;">
-                    <div style="margin-bottom: 1.5rem;">
-                      <strong style="color: #60a5fa; font-size: 0.9rem;">CAPABILITY:</strong>
-                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
+                    <div style="margin-bottom: 2rem;">
+                      <strong style="color: #60a5fa; font-size: 1rem; letter-spacing: 0.05em;">CAPABILITY:</strong>
+                      <p style="font-size: 1.1rem; line-height: 1.8; color: #e5e7eb; margin: 0.75rem 0 0 0;">
                         ${this.content[layer].capability}
                       </p>
                     </div>
 
-                    <div style="margin-bottom: 1.5rem;">
-                      <strong style="color: #60a5fa; font-size: 0.9rem;">FOUNDER/VC PAIN SOLVED:</strong>
-                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
+                    <div style="margin-bottom: 2rem;">
+                      <strong style="color: #60a5fa; font-size: 1rem; letter-spacing: 0.05em;">FOUNDER/VC PAIN SOLVED:</strong>
+                      <p style="font-size: 1.1rem; line-height: 1.8; color: #e5e7eb; margin: 0.75rem 0 0 0;">
                         ${this.content[layer].pain}
                       </p>
                     </div>
 
-                    <div style="margin-bottom: 1.5rem;">
-                      <strong style="color: #60a5fa; font-size: 0.9rem;">VALUE PROPOSITION:</strong>
-                      <p style="font-size: 1rem; line-height: 1.6; color: #e5e7eb; margin: 0.5rem 0 0 0;">
+                    <div style="margin-bottom: 2rem;">
+                      <strong style="color: #60a5fa; font-size: 1rem; letter-spacing: 0.05em;">VALUE PROPOSITION:</strong>
+                      <p style="font-size: 1.1rem; line-height: 1.8; color: #e5e7eb; margin: 0.75rem 0 0 0;">
                         ${this.content[layer].valueProposition}
                       </p>
                     </div>
