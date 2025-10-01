@@ -24,6 +24,7 @@ body {
   color: var(--color-charcoal);
   background-color: var(--color-white);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ==================== TYPOGRAPHY ==================== */

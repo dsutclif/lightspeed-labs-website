@@ -248,6 +248,7 @@ class SecureInformAct {
 
           @media (max-width: 1024px) {
             .secure-inform-act {
+              background: none !important;
               margin: 0 !important;
               border: none !important;
               outline: none !important;
@@ -257,6 +258,9 @@ class SecureInformAct {
               grid-template-columns: 1fr !important;
               gap: 2rem !important;
               padding: 1rem 0.5rem !important;
+              max-width: 100vw !important;
+              width: 100% !important;
+              margin: 0 !important;
               text-align: left;
             }
 
