@@ -129,29 +129,14 @@ export default function SecureInformAct({
                 }}
                 className="w-full h-full"
               >
-                <motion.div
-                  animate={
-                    activeLayer === layer
-                      ? { scale: 1.02 }
-                      : { scale: 1.0 }
-                  }
-                  transition={{
-                    type: "spring",
-                    stiffness: 240,
-                    damping: 22
-                  }}
-                  className="w-full h-full"
-                  style={{ transformOrigin: 'center' }}
-                >
-                  <Image
-                    src={layerImages[layer]}
-                    alt=""
-                    fill
-                    sizes="(min-width: 1024px) 560px, 80vw"
-                    priority={layer === 'secure'}
-                    style={{ objectFit: 'contain' }}
-                  />
-                </motion.div>
+                <Image
+                  src={layerImages[layer]}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 560px, 80vw"
+                  priority={layer === 'secure'}
+                  style={{ objectFit: 'contain' }}
+                />
               </motion.div>
             </button>
           ))}
