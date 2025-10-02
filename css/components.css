@@ -260,10 +260,11 @@
 }
 
 .nav-link {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-normal);
   color: var(--color-white);
   transition: color var(--transition-fast);
   position: relative;
+  text-transform: uppercase;
 }
 
 .header.scrolled .nav-link {
@@ -274,6 +275,7 @@
   color: var(--color-accent-1);
 }
 
+/* Removed underline hover effect
 .nav-link::after {
   content: '';
   position: absolute;
@@ -288,6 +290,7 @@
 .nav-link:hover::after {
   width: 100%;
 }
+*/
 
 .mobile-menu-toggle {
   display: block;
