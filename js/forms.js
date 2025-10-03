@@ -3,6 +3,8 @@
  * Contact form, newsletter signup
  */
 
+import { WEBHOOKS } from './config.js';
+
 export function initForms() {
   // Initialize contact form
   const contactForm = document.getElementById('contact-form');
@@ -114,7 +116,8 @@ async function handleContactSubmit(e) {
     companyType: form.companyType.value,
     interest: form.interest.value,
     message: form.message.value.trim(),
-    source: 'Contact Form'
+    source: 'Contact Form',
+    timestamp: new Date().toISOString()
   };
 
   // Show loading state
@@ -122,11 +125,11 @@ async function handleContactSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Sending...';
 
   try {
-    // Submit to Formspree
-    const response = await fetch('https://formspree.io/f/xnngvykz', {
+    // Submit to Zapier webhook
+    const response = await fetch(WEBHOOKS.CONTACT, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     });
 
     if (response.ok) {
@@ -163,18 +166,19 @@ async function handleNewsletterSubmit(e) {
 
   const formData = {
     email: emailInput.value.trim(),
-    source: 'Newsletter Signup'
+    source: 'Newsletter Signup',
+    timestamp: new Date().toISOString()
   };
 
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="loading"></span> Subscribing...';
 
   try {
-    // Submit to Formspree
-    const response = await fetch('https://formspree.io/f/xnngvykz', {
+    // Submit to Zapier webhook
+    const response = await fetch(WEBHOOKS.NEWSLETTER, {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(form)
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
     });
 
     if (response.ok) {
@@ -193,7 +197,7 @@ async function handleNewsletterSubmit(e) {
   }
 }
 
-// Note: Forms now submit to Formspree which handles email delivery
+// Note: Forms now submit to Zapier webhooks which can route to Airtable, email, etc.
 
 // Show form success message
 function showFormSuccess(form, message) {
