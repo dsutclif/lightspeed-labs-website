@@ -12,29 +12,30 @@
   background-color: inherit;
 }
 
-/* Systematic alternating transparency pattern */
-/* OPAQUE sections (even positions): fully block the hero image */
+/* Updated systematic transparency pattern per specifications */
+/* OPAQUE sections: fully block the hero image */
 .featured-in-ticker,
-.partners,
-.security,
-.implementations,
-.about {
-  background-color: var(--color-white) !important;
-}
-
-/* TRANSLUCENT sections (odd positions): allow hero image to show through */
 .problem,
 .solutions,
 .methodology,
+.about,
+.footer {
+  background-color: var(--color-white) !important;
+}
+
+/* TRANSLUCENT sections: allow hero image to show through at 65% opacity */
+.partners,
+.security,
+.implementations,
 .insights,
 .newsletter-section,
 .contact {
-  background-color: rgba(248, 250, 252, 0.85) !important; /* Light gray with transparency */
+  background-color: rgba(248, 250, 252, 0.65) !important; /* 65% opacity in all views */
 }
 
-/* Special case: secure-inform-act should be minimal/transparent */
+/* Special case: secure-inform-act should show image at 100% opacity */
 #secure-inform-act {
-  background-color: rgba(255, 255, 255, 0.1) !important;
+  background-color: transparent !important;
   position: relative;
   z-index: 2;
 }
@@ -89,18 +90,18 @@
     transform: translate3d(0, 0, 0);
   }
 
-  /* Ensure mobile transparency values are optimized for performance */
-  .problem,
-  .solutions,
-  .methodology,
+  /* Maintain consistent transparency values on mobile per specifications */
+  .partners,
+  .security,
+  .implementations,
   .insights,
   .newsletter-section,
   .contact {
-    background-color: rgba(248, 250, 252, 0.9) !important; /* Slightly more opaque on mobile for readability */
+    background-color: rgba(248, 250, 252, 0.65) !important; /* 65% opacity in all views */
   }
 
   #secure-inform-act {
-    background-color: rgba(255, 255, 255, 0.2) !important; /* Slightly more opaque on mobile */
+    background-color: transparent !important; /* Show image at 100% opacity */
   }
 }
 
@@ -924,8 +925,8 @@ main > section:not(.hero) {
 /* ==================== FOOTER ==================== */
 
 .footer {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+  /* Background set by systematic transparency pattern above - now white */
+  color: var(--color-primary); /* Changed to primary color for readability on white background */
   padding-top: var(--space-16);
   padding-bottom: var(--space-8);
 }
@@ -938,13 +939,13 @@ main > section:not(.hero) {
 }
 
 .footer-column h4 {
-  color: var(--color-white);
+  color: var(--color-primary); /* Changed for white background */
   margin-bottom: var(--space-4);
 }
 
 .footer-column p,
 .footer-column a {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-secondary); /* Changed for white background */
   line-height: var(--line-height-relaxed);
 }
 
@@ -960,13 +961,13 @@ main > section:not(.hero) {
 
 .footer-bottom {
   padding-top: var(--space-8);
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(27, 54, 93, 0.2); /* Changed border color for white background */
   text-align: center;
-  color: var(--color-white);
+  color: var(--color-secondary); /* Changed for white background */
   font-size: var(--font-size-sm);
 }
 
 .footer-bottom p {
-  color: var(--color-white);
+  color: var(--color-secondary); /* Changed for white background */
   margin: 0;
 }
