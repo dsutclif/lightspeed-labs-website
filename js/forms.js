@@ -3,7 +3,7 @@
  * Contact form, newsletter signup
  */
 
-import { WEBHOOKS } from './config.js';
+import { API_ENDPOINTS } from './config.js';
 
 export function initForms() {
   // Initialize contact form
@@ -125,8 +125,8 @@ async function handleContactSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Sending...';
 
   try {
-    // Submit to Zapier webhook
-    const response = await fetch(WEBHOOKS.CONTACT, {
+    // Submit to Vercel API function
+    const response = await fetch(API_ENDPOINTS.CONTACT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -174,8 +174,8 @@ async function handleNewsletterSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Subscribing...';
 
   try {
-    // Submit to Zapier webhook
-    const response = await fetch(WEBHOOKS.NEWSLETTER, {
+    // Submit to Vercel API function
+    const response = await fetch(API_ENDPOINTS.NEWSLETTER, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
@@ -197,7 +197,7 @@ async function handleNewsletterSubmit(e) {
   }
 }
 
-// Note: Forms now submit to Zapier webhooks which can route to Airtable, email, etc.
+// Note: Forms now submit to Vercel API functions which securely send data to Airtable
 
 // Show form success message
 function showFormSuccess(form, message) {

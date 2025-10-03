@@ -1,17 +1,17 @@
 /**
  * Configuration for form submissions
- * Replace these URLs with your actual Zapier webhook URLs
+ * Uses Vercel API functions to securely submit to Airtable
  */
 
-export const WEBHOOKS = {
-  // Replace with your Zapier webhook URL for contact form
-  CONTACT: 'ZAPIER_CONTACT_WEBHOOK_URL',
+export const API_ENDPOINTS = {
+  // Vercel API function for contact form
+  CONTACT: '/api/contact',
 
-  // Replace with your Zapier webhook URL for newsletter
-  NEWSLETTER: 'ZAPIER_NEWSLETTER_WEBHOOK_URL'
+  // Vercel API function for newsletter
+  NEWSLETTER: '/api/newsletter'
 };
 
-// Data structure that will be sent to webhooks
+// Data structure that will be sent to API endpoints
 export const FORM_SCHEMAS = {
   contact: {
     name: 'string',
