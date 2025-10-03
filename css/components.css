@@ -257,6 +257,8 @@
 .nav-list {
   display: none;
   gap: var(--space-8);
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-link {
@@ -340,6 +342,21 @@
   color: var(--color-primary);
 }
 
+/* Contact Us button styling - only show as button in desktop view */
+.nav-link.btn.btn-primary {
+  /* On mobile, display as regular nav link */
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: var(--color-white);
+  text-transform: uppercase;
+}
+
+.header.scrolled .nav-link.btn.btn-primary {
+  color: var(--color-charcoal);
+}
+
 @media (min-width: 768px) {
   .nav-list {
     display: flex;
@@ -347,6 +364,39 @@
 
   .mobile-menu-toggle {
     display: none;
+  }
+
+  /* Show Contact Us as button only in desktop view */
+  .nav-link.btn.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    text-transform: none;
+    border-radius: var(--border-radius-md);
+    border: var(--border-width-thick) solid transparent;
+  }
+
+  /* Header-specific button styling when transparent */
+  .header:not(.scrolled) .nav-link.btn.btn-primary {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .header:not(.scrolled) .nav-link.btn.btn-primary:hover {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border-color: var(--color-white);
+  }
+
+  .nav-link.btn.btn-primary:hover {
+    background-color: var(--color-accent-1);
+    border-color: var(--color-accent-1);
+    color: var(--color-white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
   }
 }
 
