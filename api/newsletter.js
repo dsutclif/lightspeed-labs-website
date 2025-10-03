@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { email, source, timestamp } = req.body;
+    const { email, source } = req.body;
 
     // Validate required fields
     if (!email) {
@@ -55,7 +55,6 @@ export default async function handler(req, res) {
           'Interaction Type': 'Newsletter Signup',
           Email: email,
           Source: source,
-          Timestamp: timestamp,
           'Submitted At': new Date().toISOString(),
           Status: 'Subscribed'
         }
@@ -73,7 +72,6 @@ export default async function handler(req, res) {
           'Interaction Type': 'Newsletter Signup',
           Email: email,
           Source: source,
-          Timestamp: timestamp,
           'Submitted At': new Date().toISOString(),
           Status: 'Subscribed'
         }

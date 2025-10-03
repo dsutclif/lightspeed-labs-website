@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, company, companyType, interest, message, source, timestamp } = req.body;
+    const { name, email, company, companyType, interest, message, source } = req.body;
 
     // Validate required fields
     if (!name || !email || !company || !companyType || !interest || !message) {
@@ -60,7 +60,6 @@ export default async function handler(req, res) {
           Interest: interest,
           Message: message,
           Source: source,
-          Timestamp: timestamp,
           'Submitted At': new Date().toISOString()
         }
       })
@@ -82,7 +81,6 @@ export default async function handler(req, res) {
           Interest: interest,
           Message: message,
           Source: source,
-          Timestamp: timestamp,
           'Submitted At': new Date().toISOString()
         }
       }, null, 2));
