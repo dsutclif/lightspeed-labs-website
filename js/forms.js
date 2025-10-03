@@ -106,31 +106,35 @@ async function handleContactSubmit(e) {
     return;
   }
 
-  // FormSubmit.co handles reply-to automatically using the email field
+  // Get form data
+  const formData = {
+    name: form.name.value.trim(),
+    email: form.email.value.trim(),
+    company: form.company.value.trim(),
+    companyType: form.companyType.value,
+    interest: form.interest.value,
+    message: form.message.value.trim(),
+    source: 'Contact Form'
+  };
 
   // Show loading state
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="loading"></span> Sending...';
 
   try {
-    // Submit to FormSubmit.co
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form)
-    });
+    // TODO: Implement Airtable API integration separately
+    // For now, just simulate submission
+    await simulateSubmission(formData);
 
-    if (response.ok) {
-      // Show success message
-      showFormSuccess(form, 'Thank you! We\'ll be in touch soon.');
-      // Reset form
-      form.reset();
-    } else {
-      throw new Error('Form submission failed');
-    }
+    // Show success message
+    showFormSuccess(form, 'Thank you! We\'ll be in touch soon.');
+
+    // Reset form
+    form.reset();
 
   } catch (error) {
     console.error('Form submission error:', error);
-    showFormError(form, 'Something went wrong. Please try again or email us directly at info@lightspeed-labs.com');
+    showFormError(form, 'Something went wrong. Please try again or email us directly.');
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = btnText;
@@ -151,33 +155,37 @@ async function handleNewsletterSubmit(e) {
     return;
   }
 
+  const formData = {
+    email: emailInput.value.trim(),
+    source: 'Newsletter Signup'
+  };
+
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="loading"></span> Subscribing...';
 
   try {
-    // Submit to FormSubmit.co
-    const response = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form)
-    });
+    // TODO: Implement Airtable API integration separately
+    await simulateSubmission(formData);
 
-    if (response.ok) {
-      showFormSuccess(form, 'Successfully subscribed! We\'ll send you monthly automation insights.');
-      form.reset();
-    } else {
-      throw new Error('Newsletter submission failed');
-    }
+    showFormSuccess(form, 'Successfully subscribed! Check your email.');
+    form.reset();
 
   } catch (error) {
     console.error('Newsletter submission error:', error);
-    showFormError(form, 'Something went wrong. Please try again or email us at info@lightspeed-labs.com');
+    showFormError(form, 'Something went wrong. Please try again.');
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = btnText;
   }
 }
 
-// Note: Forms now submit directly to FormSubmit.co which handles email delivery to info@lightspeed-labs.com
+// Simulate form submission (replace with actual API call)
+function simulateSubmission(data) {
+  return new Promise((resolve) => {
+    console.log('Form data to be submitted:', data);
+    setTimeout(resolve, 1500);
+  });
+}
 
 // Show form success message
 function showFormSuccess(form, message) {
