@@ -3,6 +3,15 @@
  * Hero, services, contact, footer, etc.
  */
 
+/* ==================== SECTION LAYERING ==================== */
+
+/* Ensure all sections after hero layer properly above the fixed background */
+.section:not(.hero) {
+  position: relative;
+  z-index: 2;
+  background-color: inherit;
+}
+
 /* ==================== HERO SECTION ==================== */
 
 .hero {
@@ -12,6 +21,7 @@
   align-items: center;
   background: linear-gradient(135deg, rgba(27, 54, 93, 0.7) 0%, rgba(43, 74, 95, 0.7) 100%);
   overflow: hidden;
+  z-index: 1;
 }
 
 /* Desktop: Reduce height to show next section */
@@ -26,14 +36,15 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   background-image: url('../images/placeholders/hero-background-1920x1080.png');
   background-size: cover;
-  background-position: center;
+  background-position: center center;
   background-attachment: fixed;
+  background-repeat: no-repeat;
   opacity: 0.3;
-  z-index: -1;
+  z-index: -2;
   will-change: transform;
   transform: translateZ(0);
 }
@@ -44,6 +55,12 @@
     background-attachment: scroll;
     position: absolute;
     height: 100%;
+    z-index: -1;
+  }
+
+  /* On mobile, reduce the parallax effect for better performance */
+  .section:not(.hero) {
+    z-index: 1;
   }
 }
 
@@ -100,6 +117,8 @@
 
 .problem {
   background-color: var(--color-light-gray);
+  position: relative;
+  z-index: 2;
 }
 
 .problem-content {
