@@ -52,7 +52,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         fields: {
-          Type: 'Contact Form',
+          'Interaction Type': 'Contact Form',
           Name: name,
           Email: email,
           Company: company,
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
       console.error('Request URL:', `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE}`);
       console.error('Request body was:', JSON.stringify({
         fields: {
-          Type: 'Contact Form',
+          'Interaction Type': 'Contact Form',
           Name: name,
           Email: email,
           Company: company,

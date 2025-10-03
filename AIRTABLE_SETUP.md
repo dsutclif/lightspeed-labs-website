@@ -8,7 +8,7 @@
 ## Step 2: Create Interactions Table
 
 Create a table called "Interactions" with these fields:
-- **Type** (Single select: Contact Form, Newsletter Signup)
+- **Interaction Type** (Single select: Contact Form, Newsletter Signup)
 - **Name** (Single line text) - *for contact forms only*
 - **Email** (Email) - *required for both types*
 - **Company** (Single line text) - *for contact forms only*
@@ -53,7 +53,7 @@ Deploy your site to Vercel and your forms will automatically start saving to Air
 ## Testing
 
 After deployment, test both forms:
-- Contact form should create records in "Interactions" table with Type = "Contact Form"
-- Newsletter signup should create records in "Interactions" table with Type = "Newsletter Signup"
+- Contact form should create records in "Interactions" table with Interaction Type = "Contact Form"
+- Newsletter signup should create records in "Interactions" table with Interaction Type = "Newsletter Signup"
 
-Both form types will appear in the same table, differentiated by the "Type" field.
+Both form types will appear in the same table, differentiated by the "Interaction Type" field.
