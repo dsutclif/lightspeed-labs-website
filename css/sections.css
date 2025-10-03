@@ -10,7 +10,7 @@
   min-height: 100vh; /* Full height on mobile for better mobile experience */
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(27, 54, 93, 0.8) 0%, rgba(43, 74, 95, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(27, 54, 93, 0.7) 0%, rgba(43, 74, 95, 0.7) 100%);
   overflow: hidden;
 }
 
