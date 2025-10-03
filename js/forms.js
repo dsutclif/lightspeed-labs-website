@@ -106,17 +106,24 @@ async function handleContactSubmit(e) {
     return;
   }
 
-  // FormSubmit.co handles reply-to automatically using the email field
+  // Set reply-to email dynamically
+  const replyToField = form.querySelector('input[name="_replyto"]');
+  if (replyToField) {
+    replyToField.value = form.email.value.trim();
+  }
 
   // Show loading state
   submitBtn.disabled = true;
   submitBtn.innerHTML = '<span class="loading"></span> Sending...';
 
   try {
-    // Submit to FormSubmit.co
+    // Submit to Formspree
     const response = await fetch(form.action, {
       method: 'POST',
-      body: new FormData(form)
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
     });
 
     if (response.ok) {
@@ -155,10 +162,13 @@ async function handleNewsletterSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Subscribing...';
 
   try {
-    // Submit to FormSubmit.co
+    // Submit to Formspree
     const response = await fetch(form.action, {
       method: 'POST',
-      body: new FormData(form)
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
     });
 
     if (response.ok) {
@@ -177,7 +187,7 @@ async function handleNewsletterSubmit(e) {
   }
 }
 
-// Note: Forms now submit directly to FormSubmit.co which handles email delivery to info@lightspeed-labs.com
+// Note: Forms now submit directly to Formspree which handles email delivery to info@lightspeed-labs.com
 
 // Show form success message
 function showFormSuccess(form, message) {

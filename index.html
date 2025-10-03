@@ -254,9 +254,9 @@
       <div class="newsletter-signup">
         <h3>Sign up For Our AmplifAI Newsletter</h3>
         <p>Monthly strategies for automation and efficiency</p>
-        <form id="newsletter-form" class="newsletter-form" action="https://formsubmit.co/info@lightspeed-labs.com" method="POST">
+        <form id="newsletter-form" class="newsletter-form" action="https://formspree.io/f/xpwzewdo" method="POST">
+          <input type="hidden" name="_to" value="info@lightspeed-labs.com">
           <input type="hidden" name="_subject" value="Newsletter Subscription - Lightspeed Labs">
-          <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="form_type" value="newsletter">
           <input type="email" name="email" class="form-input" placeholder="Your email address" required>
           <button type="submit" class="btn btn-primary">Subscribe</button>
@@ -322,11 +322,12 @@
         <!-- Contact Form -->
         <div class="contact-form-container">
           <h3>Prefer Email?</h3>
-          <form id="contact-form" action="https://formsubmit.co/info@lightspeed-labs.com" method="POST">
-            <!-- Hidden fields for FormSubmit -->
+          <form id="contact-form" action="https://formspree.io/f/xpwzewdo" method="POST">
+            <!-- Hidden fields for Formspree -->
+            <input type="hidden" name="_to" value="info@lightspeed-labs.com">
             <input type="hidden" name="_subject" value="New Contact Form Submission - Lightspeed Labs">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_replyto" value="">
+            <input type="hidden" name="_next" value="">
 
             <div class="form-group">
               <label for="name" class="form-label form-label-required">Name</label>
