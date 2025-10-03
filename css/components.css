@@ -437,8 +437,6 @@
     background-color: var(--color-accent-1);
     border-color: var(--color-accent-1);
     color: var(--color-white);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
   }
 
   /* General hover state for non-scrolled header */
@@ -447,8 +445,6 @@
     color: var(--color-primary);
     border-color: var(--color-white);
     font-weight: var(--font-weight-bold);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
   }
 }
 
