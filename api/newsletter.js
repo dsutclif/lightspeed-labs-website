@@ -55,7 +55,6 @@ export default async function handler(req, res) {
           'Interaction Type': 'Newsletter Signup',
           Email: email,
           Source: source,
-          Status: 'Subscribed'
         }
       })
     });
@@ -71,7 +70,6 @@ export default async function handler(req, res) {
           'Interaction Type': 'Newsletter Signup',
           Email: email,
           Source: source,
-          Status: 'Subscribed'
         }
       }, null, 2));
       return res.status(500).json({
