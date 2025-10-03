@@ -19,7 +19,7 @@
   min-height: 100vh; /* Full height on mobile for better mobile experience */
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, rgba(27, 54, 93, 0.7) 0%, rgba(43, 74, 95, 0.7) 100%);
+  background: linear-gradient(135deg, rgba(27, 54, 93, 0.75) 0%, rgba(43, 74, 95, 0.75) 100%);
   overflow: hidden;
   z-index: 1;
 }
@@ -140,7 +140,7 @@
 /* ==================== PARTNERS SECTION ==================== */
 
 .partners {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-white);
 }
 
 .partners-grid {
@@ -237,7 +237,7 @@
 /* ==================== IMPLEMENTATIONS SECTION ==================== */
 
 .implementations {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-white);
 }
 
 .implementation-grid {
@@ -385,7 +385,7 @@
 /* ==================== SECURITY SECTION ==================== */
 
 .security {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-white);
 }
 
 .security-grid {
@@ -755,7 +755,7 @@
 /* ==================== ABOUT/TEAM SECTION ==================== */
 
 .about {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--color-white);
 }
 
 .about-container {
