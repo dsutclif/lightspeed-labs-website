@@ -64,8 +64,24 @@ export default async function handler(req, res) {
 
     if (!airtableResponse.ok) {
       const errorData = await airtableResponse.text();
-      console.error('Airtable error:', errorData);
-      return res.status(500).json({ error: 'Failed to save newsletter signup' });
+      console.error('Airtable API Error Details:');
+      console.error('Status:', airtableResponse.status);
+      console.error('Response:', errorData);
+      console.error('Request URL:', `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE}`);
+      console.error('Request body was:', JSON.stringify({
+        fields: {
+          Type: 'Newsletter Signup',
+          Email: email,
+          Source: source,
+          Timestamp: timestamp,
+          'Submitted At': new Date().toISOString(),
+          Status: 'Subscribed'
+        }
+      }, null, 2));
+      return res.status(500).json({
+        error: 'Failed to save newsletter signup',
+        details: errorData
+      });
     }
 
     const airtableData = await airtableResponse.json();
