@@ -215,6 +215,19 @@
   justify-content: space-between;
   padding-top: var(--space-1); /* Further reduced for even less height */
   padding-bottom: var(--space-1); /* Further reduced for even less height */
+  position: relative;
+}
+
+/* Center the navigation on desktop */
+@media (min-width: 768px) {
+  .header-container {
+    justify-content: center;
+  }
+
+  .logo {
+    position: absolute;
+    left: 0;
+  }
 }
 
 .logo {
@@ -373,22 +386,25 @@
     border-color: var(--color-primary);
     padding: var(--space-2) var(--space-4);
     font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
     text-transform: none;
     border-radius: var(--border-radius-md);
     border: var(--border-width-thick) solid transparent;
   }
 
-  /* Header-specific button styling when transparent */
+  /* Header-specific button styling when transparent - improved readability */
   .header:not(.scrolled) .nav-link.btn.btn-primary {
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.25);
     color: var(--color-white);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    font-weight: var(--font-weight-bold);
   }
 
   .header:not(.scrolled) .nav-link.btn.btn-primary:hover {
     background-color: var(--color-white);
     color: var(--color-primary);
     border-color: var(--color-white);
+    font-weight: var(--font-weight-bold);
   }
 
   .nav-link.btn.btn-primary:hover {
