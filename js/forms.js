@@ -122,19 +122,25 @@ async function handleContactSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Sending...';
 
   try {
-    // TODO: Implement Airtable API integration separately
-    // For now, just simulate submission
-    await simulateSubmission(formData);
+    // Submit to Netlify Forms
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
 
-    // Show success message
-    showFormSuccess(form, 'Thank you! We\'ll be in touch soon.');
-
-    // Reset form
-    form.reset();
+    if (response.ok) {
+      // Show success message
+      showFormSuccess(form, 'Thank you! We\'ll be in touch soon.');
+      // Reset form
+      form.reset();
+    } else {
+      throw new Error('Form submission failed');
+    }
 
   } catch (error) {
     console.error('Form submission error:', error);
-    showFormError(form, 'Something went wrong. Please try again or email us directly.');
+    showFormError(form, 'Something went wrong. Please try again or email us directly at info@lightspeed-labs.com');
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = btnText;
@@ -164,28 +170,30 @@ async function handleNewsletterSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Subscribing...';
 
   try {
-    // TODO: Implement Airtable API integration separately
-    await simulateSubmission(formData);
+    // Submit to Netlify Forms
+    const response = await fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    });
 
-    showFormSuccess(form, 'Successfully subscribed! Check your email.');
-    form.reset();
+    if (response.ok) {
+      showFormSuccess(form, 'Successfully subscribed! We\'ll send you monthly automation insights.');
+      form.reset();
+    } else {
+      throw new Error('Newsletter submission failed');
+    }
 
   } catch (error) {
     console.error('Newsletter submission error:', error);
-    showFormError(form, 'Something went wrong. Please try again.');
+    showFormError(form, 'Something went wrong. Please try again or email us at info@lightspeed-labs.com');
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerHTML = btnText;
   }
 }
 
-// Simulate form submission (replace with actual API call)
-function simulateSubmission(data) {
-  return new Promise((resolve) => {
-    console.log('Form data to be submitted:', data);
-    setTimeout(resolve, 1500);
-  });
-}
+// Note: Forms now submit to Netlify Forms which handles email delivery and can sync to Airtable via Zapier
 
 // Show form success message
 function showFormSuccess(form, message) {
