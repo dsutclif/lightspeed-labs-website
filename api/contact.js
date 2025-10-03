@@ -60,7 +60,6 @@ export default async function handler(req, res) {
           Interest: interest,
           Message: message,
           Source: source,
-          'Submitted At': new Date().toISOString()
         }
       })
     });
@@ -81,7 +80,6 @@ export default async function handler(req, res) {
           Interest: interest,
           Message: message,
           Source: source,
-          'Submitted At': new Date().toISOString()
         }
       }, null, 2));
       return res.status(500).json({
