@@ -122,11 +122,11 @@ async function handleContactSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Sending...';
 
   try {
-    // Submit to Netlify Forms
-    const response = await fetch('/', {
+    // Submit to Formspree
+    const response = await fetch('https://formspree.io/f/xnngvykz', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
     });
 
     if (response.ok) {
@@ -170,11 +170,11 @@ async function handleNewsletterSubmit(e) {
   submitBtn.innerHTML = '<span class="loading"></span> Subscribing...';
 
   try {
-    // Submit to Netlify Forms
-    const response = await fetch('/', {
+    // Submit to Formspree
+    const response = await fetch('https://formspree.io/f/xnngvykz', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(new FormData(form)).toString()
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
     });
 
     if (response.ok) {
@@ -193,7 +193,7 @@ async function handleNewsletterSubmit(e) {
   }
 }
 
-// Note: Forms now submit to Netlify Forms which handles email delivery and can sync to Airtable via Zapier
+// Note: Forms now submit to Formspree which handles email delivery
 
 // Show form success message
 function showFormSuccess(form, message) {
