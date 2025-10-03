@@ -36,7 +36,7 @@ export default async function handler(req, res) {
     // Get Airtable configuration from environment variables
     const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
     const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
-    const AIRTABLE_NEWSLETTER_TABLE = process.env.AIRTABLE_NEWSLETTER_TABLE || 'Newsletter Signups';
+    const AIRTABLE_TABLE = process.env.AIRTABLE_TABLE || 'Interactions';
 
     if (!AIRTABLE_TOKEN || !AIRTABLE_BASE_ID) {
       console.error('Missing Airtable configuration');
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     }
 
     // Submit to Airtable
-    const airtableResponse = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_NEWSLETTER_TABLE}`, {
+    const airtableResponse = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${AIRTABLE_TABLE}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
@@ -52,6 +52,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         fields: {
+          Type: 'Newsletter Signup',
           Email: email,
           Source: source,
           Timestamp: timestamp,

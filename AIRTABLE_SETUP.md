@@ -5,27 +5,20 @@
 1. Go to https://airtable.com and sign in
 2. Create a new base called "Lightspeed Labs Website"
 
-## Step 2: Create Tables
+## Step 2: Create Interactions Table
 
-### Contact Forms Table
-Create a table called "Contact Forms" with these fields:
-- **Name** (Single line text)
-- **Email** (Email)
-- **Company** (Single line text)
-- **Company Type** (Single select: VC, Startup, Digital, Other)
-- **Interest** (Single line text)
-- **Message** (Long text)
-- **Source** (Single line text)
-- **Timestamp** (Date)
-- **Submitted At** (Date)
-
-### Newsletter Signups Table
-Create a table called "Newsletter Signups" with these fields:
-- **Email** (Email)
-- **Source** (Single line text)
-- **Timestamp** (Date)
-- **Submitted At** (Date)
-- **Status** (Single select: Subscribed, Unsubscribed)
+Create a table called "Interactions" with these fields:
+- **Type** (Single select: Contact Form, Newsletter Signup)
+- **Name** (Single line text) - *for contact forms only*
+- **Email** (Email) - *required for both types*
+- **Company** (Single line text) - *for contact forms only*
+- **Company Type** (Single select: VC, Startup, Digital, Other) - *for contact forms only*
+- **Interest** (Single line text) - *for contact forms only*
+- **Message** (Long text) - *for contact forms only*
+- **Source** (Single line text) - *tracks where submission came from*
+- **Timestamp** (Date) - *when form was filled*
+- **Submitted At** (Date) - *when record was created*
+- **Status** (Single select: Subscribed, Unsubscribed) - *for newsletter signups only*
 
 ## Step 3: Get API Credentials
 
@@ -50,8 +43,7 @@ In your Vercel dashboard, add these environment variables:
 ```
 AIRTABLE_TOKEN=pat_your_token_here
 AIRTABLE_BASE_ID=app_your_base_id_here
-AIRTABLE_CONTACT_TABLE=Contact Forms
-AIRTABLE_NEWSLETTER_TABLE=Newsletter Signups
+AIRTABLE_TABLE=Interactions
 ```
 
 ## Step 6: Deploy
@@ -61,5 +53,7 @@ Deploy your site to Vercel and your forms will automatically start saving to Air
 ## Testing
 
 After deployment, test both forms:
-- Contact form should create records in "Contact Forms" table
-- Newsletter signup should create records in "Newsletter Signups" table
+- Contact form should create records in "Interactions" table with Type = "Contact Form"
+- Newsletter signup should create records in "Interactions" table with Type = "Newsletter Signup"
+
+Both form types will appear in the same table, differentiated by the "Type" field.
