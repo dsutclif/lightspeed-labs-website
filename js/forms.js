@@ -68,6 +68,30 @@ function validateField(field) {
 // Show field error
 function showFieldError(field, errorMsg) {
   const formGroup = field.closest('.form-group');
+
+  // If no form-group found (like newsletter form), create error next to field
+  if (!formGroup) {
+    let errorElement = field.parentNode.querySelector('.form-error');
+
+    if (errorMsg) {
+      field.classList.add('error');
+      if (!errorElement) {
+        errorElement = document.createElement('span');
+        errorElement.className = 'form-error';
+        errorElement.style.cssText = 'display: block; color: var(--color-error, #ef4444); font-size: 0.875rem; margin-top: 0.25rem;';
+        field.parentNode.insertBefore(errorElement, field.nextSibling);
+      }
+      errorElement.textContent = errorMsg;
+    } else {
+      field.classList.remove('error');
+      if (errorElement) {
+        errorElement.remove();
+      }
+    }
+    return;
+  }
+
+  // Original logic for forms with .form-group
   let errorElement = formGroup.querySelector('.form-error');
 
   if (errorMsg) {
@@ -126,19 +150,28 @@ async function handleContactSubmit(e) {
 
   try {
     // Submit to Vercel API function
+    console.log('Submitting contact form to:', API_ENDPOINTS.CONTACT);
+    console.log('Form data:', formData);
+
     const response = await fetch(API_ENDPOINTS.CONTACT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
 
+    console.log('Response status:', response.status);
+
     if (response.ok) {
+      const result = await response.json();
+      console.log('Success result:', result);
       // Show success message
       showFormSuccess(form, 'Thank you! We\'ll be in touch soon.');
       // Reset form
       form.reset();
     } else {
-      throw new Error('Form submission failed');
+      const errorData = await response.text();
+      console.error('API error response:', errorData);
+      throw new Error(`Form submission failed: ${response.status}`);
     }
 
   } catch (error) {
@@ -175,17 +208,26 @@ async function handleNewsletterSubmit(e) {
 
   try {
     // Submit to Vercel API function
+    console.log('Submitting newsletter form to:', API_ENDPOINTS.NEWSLETTER);
+    console.log('Form data:', formData);
+
     const response = await fetch(API_ENDPOINTS.NEWSLETTER, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
 
+    console.log('Response status:', response.status);
+
     if (response.ok) {
+      const result = await response.json();
+      console.log('Success result:', result);
       showFormSuccess(form, 'Successfully subscribed! We\'ll send you monthly automation insights.');
       form.reset();
     } else {
-      throw new Error('Newsletter submission failed');
+      const errorData = await response.text();
+      console.error('API error response:', errorData);
+      throw new Error(`Newsletter submission failed: ${response.status}`);
     }
 
   } catch (error) {
