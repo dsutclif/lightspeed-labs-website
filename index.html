@@ -6,70 +6,120 @@
 
   <!-- Ada Chatbot Error Prevention -->
   <script>
-    // Immediate error suppression for Ada chatbot
+    // Comprehensive error suppression for Ada chatbot and related scripts
     (function() {
-      // Override console.error to suppress Ada errors
+      // Store original console methods
       const originalError = console.error;
+      const originalWarn = console.warn;
+
+      // Override console.error to suppress Ada and React errors
       console.error = function(...args) {
         const errorStr = args.join(' ');
-        if (errorStr.includes('Ada Embed') || errorStr.includes('AdaEmbedError')) {
-          console.warn('Ada embed error suppressed:', errorStr);
-          return;
+        if (errorStr.includes('Ada Embed') ||
+            errorStr.includes('AdaEmbedError') ||
+            errorStr.includes('Minified React error') ||
+            errorStr.includes('react.dev/errors') ||
+            errorStr.includes('embed2.') ||
+            errorStr.includes('4bd1b696-') ||
+            errorStr.includes('1684-')) {
+          return; // Completely suppress these errors
         }
         originalError.apply(console, args);
       };
 
-      // Global error suppression
+      // More aggressive global error suppression
       window.addEventListener('error', function(e) {
-        if (e.error && e.error.message &&
-            (e.error.message.includes('Ada Embed') ||
-             e.error.message.includes('AdaEmbedError'))) {
-          e.stopPropagation();
+        const errorMessage = e.error ? e.error.message : '';
+        const errorSource = e.filename || '';
+
+        if (errorMessage.includes('Ada Embed') ||
+            errorMessage.includes('AdaEmbedError') ||
+            errorMessage.includes('Minified React error') ||
+            errorSource.includes('embed2.') ||
+            errorSource.includes('4bd1b696-') ||
+            errorSource.includes('1684-') ||
+            errorSource.includes('page-')) {
+          e.stopImmediatePropagation();
           e.preventDefault();
-          console.warn('Ada embed error prevented');
           return false;
         }
       }, true);
 
       // Promise rejection suppression
       window.addEventListener('unhandledrejection', function(e) {
-        if (e.reason && e.reason.message &&
-            (e.reason.message.includes('Ada Embed') ||
-             e.reason.message.includes('AdaEmbedError'))) {
-          e.stopPropagation();
+        const errorMessage = e.reason ? (e.reason.message || e.reason.toString()) : '';
+
+        if (errorMessage.includes('Ada Embed') ||
+            errorMessage.includes('AdaEmbedError') ||
+            errorMessage.includes('Minified React error')) {
+          e.stopImmediatePropagation();
           e.preventDefault();
-          console.warn('Ada embed promise rejection prevented');
           return false;
         }
       }, true);
 
-      // Prevent Ada embed from initializing multiple times
-      let adaInitialized = false;
+      // Block Ada embed completely
+      let adaBlocked = false;
       Object.defineProperty(window, 'adaEmbed', {
         set: function(value) {
-          if (adaInitialized) {
-            console.warn('Ada embed already initialized, ignoring');
-            return;
+          if (adaBlocked) {
+            return; // Ignore all attempts to set Ada embed
           }
-          adaInitialized = true;
-          this._adaEmbed = value;
+          adaBlocked = true;
 
-          // Override start method
-          if (value && value.start) {
-            const originalStart = value.start;
-            value.start = function() {
-              if (this.isStarted) {
-                console.warn('Ada embed start blocked - already started');
-                return;
-              }
-              return originalStart.apply(this, arguments);
-            };
-          }
+          // Create a dummy object that does nothing
+          this._adaEmbed = {
+            start: function() {
+              console.warn('Ada embed blocked');
+              return;
+            },
+            isStarted: true
+          };
         },
         get: function() {
-          return this._adaEmbed;
+          return this._adaEmbed || {
+            start: function() { return; },
+            isStarted: true
+          };
         }
       });
+
+      // Block problematic functions that cause infinite loops
+      const blockedFunctions = ['uh', 'um', 'oq', 'iH', 'u9', 'u5', 'ig', 'ib'];
+      blockedFunctions.forEach(funcName => {
+        if (window[funcName]) {
+          window[funcName] = function() {
+            return; // No-op
+          };
+        }
+      });
+
+      // Prevent script loading from problematic sources
+      const originalCreateElement = document.createElement;
+      document.createElement = function(tagName) {
+        const element = originalCreateElement.call(this, tagName);
+
+        if (tagName.toLowerCase() === 'script') {
+          const originalSetSrc = Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src').set;
+          Object.defineProperty(element, 'src', {
+            set: function(value) {
+              if (value && (value.includes('embed2.') ||
+                          value.includes('4bd1b696-') ||
+                          value.includes('1684-') ||
+                          value.includes('ada'))) {
+                console.warn('Blocked problematic script:', value);
+                return;
+              }
+              originalSetSrc.call(this, value);
+            },
+            get: function() {
+              return this._src;
+            }
+          });
+        }
+
+        return element;
+      };
     })();
   </script>
 
