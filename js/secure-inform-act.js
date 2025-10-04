@@ -79,7 +79,7 @@ class SecureInformAct {
     this.layers.forEach((layer, index) => {
       const img = this.container.querySelector(`.layer-image[data-layer="${layer}"]`);
       const canvas = this.container.querySelector(`.layer-canvas[data-layer="${layer}"]`);
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
       const drawImage = () => {
         // Clear canvas
@@ -118,7 +118,7 @@ class SecureInformAct {
 
   getPixelAlpha(canvas, x, y) {
     try {
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
       const rect = canvas.getBoundingClientRect();
 
       // Scale coordinates to canvas size
