@@ -9,47 +9,14 @@ import { smoothScroll, throttle, loadContent } from './utils.js';
 import { initScrollAnimations } from './scroll-animations.js';
 import { initForms } from './forms.js';
 
-// Prevent Ada chatbot errors and infinite loops
-window.addEventListener('load', () => {
-  // Prevent Ada embed initialization if it's already started
-  if (window.adaEmbed && window.adaEmbed.isStarted) {
-    console.warn('Ada embed already started, preventing duplicate initialization');
-    return;
-  }
-
-  // Override Ada embed start method to prevent multiple initializations
-  if (window.adaEmbed) {
-    const originalStart = window.adaEmbed.start;
-    window.adaEmbed.start = function() {
-      if (this.isStarted) {
-        console.warn('Ada embed start called but already initialized');
-        return;
-      }
-      return originalStart.apply(this, arguments);
-    };
-  }
-});
-
 // Global error handler for unhandled errors
 window.addEventListener('error', (event) => {
-  // Suppress Ada embed errors to prevent console spam
-  if (event.error && event.error.message && event.error.message.includes('Ada Embed')) {
-    console.warn('Ada embed error suppressed:', event.error.message);
-    event.preventDefault();
-    return;
-  }
   console.error('Global error caught:', event.error);
   // In production, this could be sent to error tracking service
 });
 
 // Global error handler for unhandled promise rejections
 window.addEventListener('unhandledrejection', (event) => {
-  // Suppress Ada embed promise rejections
-  if (event.reason && event.reason.message && event.reason.message.includes('Ada Embed')) {
-    console.warn('Ada embed promise rejection suppressed:', event.reason.message);
-    event.preventDefault();
-    return;
-  }
   console.error('Unhandled promise rejection:', event.reason);
   // In production, this could be sent to error tracking service
 });
