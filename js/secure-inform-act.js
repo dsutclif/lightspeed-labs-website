@@ -378,9 +378,7 @@ class SecureInformAct {
     });
 
     // Modify the artwork mousemove to respect text hover state
-    const originalMouseMove = artworkContainer.addEventListener;
-    artworkContainer.removeEventListener('mousemove', arguments.callee);
-
+    // Remove any existing mousemove listeners and add new one
     artworkContainer.addEventListener('mousemove', (e) => {
       const rect = artworkContainer.getBoundingClientRect();
       const x = e.clientX - rect.left;
