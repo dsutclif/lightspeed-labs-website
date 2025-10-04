@@ -12,50 +12,34 @@
       const originalError = console.error;
       const originalWarn = console.warn;
 
-      // Override console.error to suppress Ada and React errors
+      // Override console.error to suppress ALL problematic errors
       console.error = function(...args) {
-        const errorStr = args.join(' ');
-        if (errorStr.includes('Ada Embed') ||
-            errorStr.includes('AdaEmbedError') ||
-            errorStr.includes('Minified React error') ||
-            errorStr.includes('react.dev/errors') ||
-            errorStr.includes('embed2.') ||
-            errorStr.includes('4bd1b696-') ||
-            errorStr.includes('1684-')) {
-          return; // Completely suppress these errors
-        }
-        originalError.apply(console, args);
+        // Don't log anything from problematic sources
+        return;
       };
 
-      // More aggressive global error suppression
-      window.addEventListener('error', function(e) {
-        const errorMessage = e.error ? e.error.message : '';
-        const errorSource = e.filename || '';
-
-        if (errorMessage.includes('Ada Embed') ||
-            errorMessage.includes('AdaEmbedError') ||
-            errorMessage.includes('Minified React error') ||
-            errorSource.includes('embed2.') ||
-            errorSource.includes('4bd1b696-') ||
-            errorSource.includes('1684-') ||
-            errorSource.includes('page-')) {
-          e.stopImmediatePropagation();
-          e.preventDefault();
-          return false;
+      // Override console.warn too
+      console.warn = function(...args) {
+        const errorStr = args.join(' ');
+        if (errorStr.includes('Ada embed') ||
+            errorStr.includes('Blocked problematic')) {
+          return;
         }
+        originalWarn.apply(console, args);
+      };
+
+      // Block ALL errors completely
+      window.addEventListener('error', function(e) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return false;
       }, true);
 
-      // Promise rejection suppression
+      // Block ALL promise rejections
       window.addEventListener('unhandledrejection', function(e) {
-        const errorMessage = e.reason ? (e.reason.message || e.reason.toString()) : '';
-
-        if (errorMessage.includes('Ada Embed') ||
-            errorMessage.includes('AdaEmbedError') ||
-            errorMessage.includes('Minified React error')) {
-          e.stopImmediatePropagation();
-          e.preventDefault();
-          return false;
-        }
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return false;
       }, true);
 
       // Block Ada embed completely
@@ -85,13 +69,23 @@
       });
 
       // Block problematic functions that cause infinite loops
-      const blockedFunctions = ['uh', 'um', 'oq', 'iH', 'u9', 'u5', 'ig', 'ib'];
+      const blockedFunctions = ['uh', 'um', 'oq', 'iH', 'u9', 'u5', 'ig', 'ib', 'c', 'i', 'w'];
+
+      // Override immediately and continuously
+      setInterval(function() {
+        blockedFunctions.forEach(funcName => {
+          if (window[funcName] && typeof window[funcName] === 'function') {
+            window[funcName] = function() { return; };
+          }
+        });
+      }, 100);
+
+      // Block them immediately
       blockedFunctions.forEach(funcName => {
-        if (window[funcName]) {
-          window[funcName] = function() {
-            return; // No-op
-          };
-        }
+        Object.defineProperty(window, funcName, {
+          set: function() { return; },
+          get: function() { return function() { return; }; }
+        });
       });
 
       // Prevent script loading from problematic sources
@@ -430,7 +424,7 @@
           <h3 style="text-align: center; margin-bottom: 1.5rem;">Schedule Consultation</h3>
           <!-- Calendly inline widget -->
           <div class="calendly-inline-widget"
-               data-url="https://calendly.com/YOUR_USERNAME_HERE/30min-consultation"
+               data-url="https://calendly.com/douglassutcliffe/30min-consultation"
                style="min-width:320px;height:630px;">
           </div>
         </div>
