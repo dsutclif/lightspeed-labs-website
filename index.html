@@ -4,6 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Ada Chatbot Error Prevention -->
+  <script>
+    // Immediate error suppression for Ada chatbot
+    (function() {
+      // Override console.error to suppress Ada errors
+      const originalError = console.error;
+      console.error = function(...args) {
+        const errorStr = args.join(' ');
+        if (errorStr.includes('Ada Embed') || errorStr.includes('AdaEmbedError')) {
+          console.warn('Ada embed error suppressed:', errorStr);
+          return;
+        }
+        originalError.apply(console, args);
+      };
+
+      // Global error suppression
+      window.addEventListener('error', function(e) {
+        if (e.error && e.error.message &&
+            (e.error.message.includes('Ada Embed') ||
+             e.error.message.includes('AdaEmbedError'))) {
+          e.stopPropagation();
+          e.preventDefault();
+          console.warn('Ada embed error prevented');
+          return false;
+        }
+      }, true);
+
+      // Promise rejection suppression
+      window.addEventListener('unhandledrejection', function(e) {
+        if (e.reason && e.reason.message &&
+            (e.reason.message.includes('Ada Embed') ||
+             e.reason.message.includes('AdaEmbedError'))) {
+          e.stopPropagation();
+          e.preventDefault();
+          console.warn('Ada embed promise rejection prevented');
+          return false;
+        }
+      }, true);
+
+      // Prevent Ada embed from initializing multiple times
+      let adaInitialized = false;
+      Object.defineProperty(window, 'adaEmbed', {
+        set: function(value) {
+          if (adaInitialized) {
+            console.warn('Ada embed already initialized, ignoring');
+            return;
+          }
+          adaInitialized = true;
+          this._adaEmbed = value;
+
+          // Override start method
+          if (value && value.start) {
+            const originalStart = value.start;
+            value.start = function() {
+              if (this.isStarted) {
+                console.warn('Ada embed start blocked - already started');
+                return;
+              }
+              return originalStart.apply(this, arguments);
+            };
+          }
+        },
+        get: function() {
+          return this._adaEmbed;
+        }
+      });
+    })();
+  </script>
+
   <!-- SEO Meta Tags -->
   <title>Lightspeed Labs | AI Workflow Automation Consulting</title>
   <meta name="description" content="AI workflow automation for VCs, startups, and digital businesses. 80%+ time savings with enterprise security. Investment memos, email automation, and custom AI solutions.">
