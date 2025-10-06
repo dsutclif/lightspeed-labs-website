@@ -37,7 +37,7 @@
 
 /* Make header buttons smaller for compact header */
 .header .btn {
-  padding: var(--space-2) var(--space-4); /* Smaller than default var(--space-3) var(--space-6) */
+  padding: 0.4rem var(--space-4); /* Reduced height by 20% from var(--space-2) */
   font-size: var(--font-size-sm); /* Smaller text */
 }
 
@@ -402,7 +402,7 @@
     background-color: var(--color-primary);
     color: var(--color-white);
     border-color: var(--color-primary);
-    padding: var(--space-2) var(--space-4);
+    padding: 0.4rem var(--space-4);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semibold);
     text-transform: none;
