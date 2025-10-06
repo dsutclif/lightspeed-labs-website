@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/dsutclif/lightspeed-labs-website/issues"
   },
-  "homepage": "https://lightspeedlabs.consulting",
+  "homepage": "https://www.lightspeed-labs.com",
   "devDependencies": {
     "eslint": "^8.0.0",
     "prettier": "^3.0.0"

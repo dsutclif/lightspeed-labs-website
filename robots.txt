@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://lightspeedlabs.consulting/sitemap.xml
+Sitemap: https://www.lightspeed-labs.com/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
